@@ -1,7 +1,11 @@
-/** @type {import('next').NextConfig} */
+/** /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
+  basePath: "/Tadbir-Tejarat",
+  assetPrefix: "/Tadbir-Tejarat",
   images: {
-    formats: ["image/avif", "image/webp"]
+    formats: ["image/avif", "image/webp"],
+    unoptimized: true,
   }
 };
 
