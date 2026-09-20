@@ -1,0 +1,133 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--color-cream);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.slide[data-active="true"] {
+  opacity: 1;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(25, 20, 15, 0.65) 0%,
+    rgba(25, 20, 15, 0.15) 45%,
+    rgba(25, 20, 15, 0) 70%
+  );
+  z-index: 1;
+}
+
+.content {
+  position: absolute;
+  inset-inline-start: clamp(1.25rem, 6vw, 4.5rem);
+  bottom: clamp(4rem, 9vh, 6.5rem);
+  inset-inline-end: clamp(1.25rem, 6vw, 4.5rem);
+  z-index: 2;
+  max-width: 34rem;
+}
+
+.eyebrow {
+  color: var(--color-ink);
+  font-size: 1.8rem;
+}
+
+.headline {
+  color: var(--color-cream);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.25;
+  margin: 0.6rem 0 1rem;
+}
+
+.sub {
+  color: var(--color-cream-deep);
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  max-width: 30rem;
+  margin-bottom: 1.75rem;
+}
+
+.cta {
+  display: inline-block;
+  padding: 0.85rem 1.9rem;
+  background: var(--color-crimson);
+  color: var(--color-cream);
+  border-radius: 50px;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.cta:hover {
+  background: var(--color-gold);
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(247, 242, 233, 0.1);
+  backdrop-filter: blur(3px);
+  color: var( --color-ink);
+  font-size: 1.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.arrow:hover {
+  background: rgba(247, 242, 233, 0.28);
+}
+
+.arrowStart {
+  inset-inline-start: clamp(0.75rem, 2vw, 2rem);
+}
+
+.arrowEnd {
+  inset-inline-end: clamp(0.75rem, 2vw, 2rem);
+}
+
+.dots {
+  position: absolute;
+  z-index: 3;
+  inset-inline-end: clamp(1.25rem, 6vw, 4.5rem);
+  bottom: clamp(1.25rem, 3vh, 2rem);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(247, 242, 233, 0.5);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.dot[data-active="true"] {
+  background: var(--color-gold-soft);
+  transform: scale(1.2);
+}
+
+@media (max-width: 640px) {
+  .arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 1.5rem;
+  }
+}
