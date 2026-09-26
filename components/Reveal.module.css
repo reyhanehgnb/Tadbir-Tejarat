@@ -1,0 +1,31 @@
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.75s ease,
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.small {
+  transform: translateY(18px);
+}
+
+.medium {
+  transform: translateY(32px);
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .small,
+  .medium {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

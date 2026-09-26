@@ -1,20 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import styles from "./Header.module.css";
 
 const navItems = [
-  { label: "خانه", href: "#home" },
-  { label: "درباره ما", href: "#about" },
-  { label: "مجموعه", href: "#collection" },
-  { label: "تماس با ما", href: "#contact" }
+  { label: "خانه", href: "/" },
+  { label: "درباره ما", href: "/about" },
+  { label: "مجموعه", href: "/collection" },
+  { label: "تماس با ما", href: "/contact" },
 ];
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [isOpen]);
   return (
-    <header className={styles.header}>
+    <header className={styles.header} ref={headerRef}>
       <div className={styles.barLayer} data-open={isOpen}>
         <span className={styles.logo}>تدبیر تجارت</span>
         <button

@@ -82,7 +82,7 @@
   border-radius: 50%;
   background: rgba(247, 242, 233, 0.1);
   backdrop-filter: blur(3px);
-  color: var( --color-ink);
+  color: var(--color-ink);
   font-size: 1.9rem;
   display: flex;
   align-items: center;
@@ -116,18 +116,95 @@
   height: 8px;
   border-radius: 50%;
   background: rgba(247, 242, 233, 0.5);
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
 }
 
 .dot[data-active="true"] {
   background: var(--color-gold-soft);
   transform: scale(1.2);
 }
-
-@media (max-width: 640px) {
+.slideImg {
+  object-fit: cover;
+}
+@media (max-width: 1040px) {
   .arrow {
     width: 35px;
     height: 35px;
     font-size: 1.5rem;
   }
+  .slideImg {
+    object-fit: fill;
+    background: var(--color-cream);
+  }
+  .hero {
+    height: 35vh;
+    min-height: 350px;
+  }
+  .headline {
+    font-size: 1.5rem;
+  }
+
+  .sub,
+  .eyebrow {
+    font-size: 0.6rem;
+  }
+  .content {
+  bottom: clamp(.5rem, 4vh, 1.5rem);
+  inset-inline-start: clamp(3.25rem, 8vw, 6rem);
+}
+}
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes heroZoom {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.slide[data-active="true"] .slideImg {
+  animation: heroZoom 9s ease-out forwards;
+}
+
+.content .eyebrow,
+.content .headline,
+.content .sub,
+.content .cta {
+  opacity: 0;
+}
+
+.slide[data-active="true"] .eyebrow {
+  animation: heroFadeUp 0.8s ease forwards;
+  animation-delay: 0.15s;
+}
+
+.slide[data-active="true"] .headline {
+  animation: heroFadeUp 0.8s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.slide[data-active="true"] .sub {
+  animation: heroFadeUp 0.8s ease forwards;
+  animation-delay: 0.45s;
+}
+
+.slide[data-active="true"] .cta {
+  animation: heroFadeUp 0.8s ease forwards;
+  animation-delay: 0.6s;
+}
+
+.slide[data-active="true"] .slideImg {
+  animation: heroZoom 6s ease-out forwards;
 }

@@ -14,7 +14,9 @@
   align-items: center;
   justify-content: space-between;
   padding-inline: clamp(1.25rem, 4vw, 3rem);
-  transition: opacity 0.4s ease, visibility 0.4s ease;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
 }
 
 .barLayer[data-open="true"] {
@@ -24,9 +26,12 @@
 }
 
 .logo {
-  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  font-size: clamp(1rem, 2vw, 1rem);
   font-weight: 700;
-  color: var(--color-ink);
+  color: var(--color-gold-soft);
+  background-color: var(--color-crimson);
+  padding: 12px;
+  border-radius: 50%;
 }
 
 .toggle {

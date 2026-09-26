@@ -2,11 +2,17 @@
   --color-cream: #f7f2e9;
   --color-cream-deep: #ede3d2;
   --color-ink: #19140f;
-  --color-gold: #b99459;
+  --color-gold: #b6863a;
   --color-gold-soft: #d9b876;
+  --color-gold-deep: #8a611f;
   --color-crimson: #7e1f2e;
+  --color-crimson-soft: #a83f52;
+  --color-plum: #3d1220;
+  --color-blush: #e8c9b8;
+  --color-steel: #6b6258;
+  --color-line: rgba(25, 20, 15, 0.12);
   --font-fa: "Vazirmatn", sans-serif;
-  --header-bar-height: 84px;
+  --header-bar-height: 74px;
 }
 
 * {

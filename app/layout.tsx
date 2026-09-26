@@ -12,18 +12,18 @@ const vazirmatn = Vazirmatn({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.yourbrand.com"),
   title: {
-    default: "برند شما | عطرهای پمپی لوکس",
+    default: "تدبیر تجارت",
     template: "%s | برند شما"
   },
   description:
-    "برند شما عطرهای پمپی را با ظرافت در شیشه‌های طلایی، مشکی و زرشکی می‌آفریند.",
-  keywords: ["اسپری پمپی", "عطر", "پرفیوم", "عطر لوکس"],
+    "برند شما تولیدکننده پمپ‌های اسپری با کیفیت در رنگ‌های طلایی، مشکی و زرشکی برای صنایع آرایشی و بهداشتی.",
+  keywords: ["پمپ اسپری", "تولید پمپ", "بسته‌بندی صنعتی", "پمپ لوسیون"],
   openGraph: {
-    title: "برند شما | عطرهای پمپی لوکس",
-    description: "عطرهای پمپی با ظرافت، در شیشه‌های طلایی، مشکی و زرشکی.",
+    title: "برند شما | تولیدکننده پمپ اسپری",
+    description: "پمپ‌های اسپری با کیفیت، در رنگ‌های طلایی، مشکی و زرشکی.",
     url: "https://www.yourbrand.com",
     siteName: "برند شما",
-    images: ["/images/products/product-1.jpg"],
+    images: ["/images/products/product-1.webp"],
     locale: "fa_IR",
     type: "website"
   },

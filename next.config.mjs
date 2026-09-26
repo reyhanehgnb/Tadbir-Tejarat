@@ -1,8 +1,7 @@
-/** @type {import('next').NextConfig} */
-
 const isGithubActions = process.env.GITHUB_ACTIONS === "true";
 const basePath = isGithubActions ? "/Tadbir-Tejarat" : "";
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
   basePath,
