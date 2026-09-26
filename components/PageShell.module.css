@@ -95,3 +95,291 @@
   font-size: 1.1rem;
   font-weight: 600;
 }
+
+.contactPage {
+  background: var(--color-cream);
+}
+
+.hero {
+  position: relative;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  overflow: hidden;
+  padding: calc(var(--header-bar-height) + clamp(3rem, 8vw, 6rem))
+    clamp(1.25rem, 6vw, 4.5rem) clamp(3rem, 7vw, 5rem);
+}
+
+.hero :global(.heroPatternSvg) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroInner {
+  position: relative;
+  max-width: 40rem;
+  animation: heroRise 0.7s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroInner {
+    animation: none;
+  }
+}
+
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0.6rem 0 1.1rem;
+}
+
+.heroText {
+  color: rgba(244, 241, 234, 0.75);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  max-width: 34rem;
+}
+
+.contactSection .heroText {
+  color: #6b6156;
+}
+
+.quickContact {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  margin-top: 2.25rem;
+  padding: 0;
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  padding-top: 1.5rem;
+}
+
+.quickContact li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-cream);
+  font-size: 0.95rem;
+}
+
+.quickContact svg {
+  color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.contactSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 6vw, 4.5rem);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .contactSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+.infoPanel {
+  border-top: 3px solid var(--color-gold);
+  border-radius: 6px;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  background: var(--color-white);
+}
+
+.panelTitle {
+  color: var(--color-ink);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0.9rem;
+}
+
+.infoList {
+  margin: 1.75rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid rgba(180, 148, 84, 0.18);
+  padding-top: 0.85rem;
+}
+
+.infoRow dt {
+  color: var(--color-gold);
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.infoRow dd {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
+.mapWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  margin-top: 1.75rem;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(180, 148, 84, 0.3);
+}
+
+.mapFrame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(0.15) contrast(1.05);
+}
+
+.formPanel {
+  background: var(--color-white);
+  border-radius: 6px;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  box-shadow: 0 20px 45px rgba(28, 22, 15, 0.09);
+  border-top: 3px solid var(--color-gold);
+}
+
+.authSwitch {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+  border-bottom: 1px solid rgba(180, 148, 84, 0.25);
+}
+
+.authTab,
+.authTabActive {
+  background: none;
+  border: none;
+  padding: 0.6rem 0.1rem;
+  font-size: 0.92rem;
+  cursor: pointer;
+  position: relative;
+  color: #8a7f72;
+}
+
+.authTabActive {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.authTabActive::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--color-gold);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #6b6156;
+  text-align: right;
+}
+
+.input,
+.textarea {
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #e3d8c9;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  outline: none;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  text-align: right;
+  font-family: inherit;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(180, 148, 84, 0.15);
+}
+
+.submitButton {
+  padding: 0.8rem 0.9rem;
+  border: none;
+  border-radius: 4px;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.submitButton:hover {
+  background: #2a231b;
+}
+
+.submitButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.submitButton:focus-visible,
+.authTab:focus-visible,
+.authTabActive:focus-visible,
+.input:focus-visible,
+.textarea:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.successMsg {
+  margin-top: 1rem;
+  color: #2f7d4f;
+  font-size: 0.9rem;
+}
+
+.errorMsg {
+  margin-top: 1rem;
+  color: #b3453f;
+  font-size: 0.9rem;
+}
