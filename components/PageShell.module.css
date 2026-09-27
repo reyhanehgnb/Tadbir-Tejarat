@@ -31,30 +31,8 @@
   line-height: 1.9;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem;
-  max-width: 72rem;
-  margin: 0 auto;
-}
-
-@media (max-width: 780px) {
-  .grid {
-    grid-template-columns: 1fr;
-    max-width: 26rem;
-  }
-}
-
 .card {
   text-align: center;
-}
-
-.imgWrap {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  border-radius: 4px;
-  overflow: hidden;
 }
 
 .cardName {
@@ -382,4 +360,285 @@
   margin-top: 1rem;
   color: #b3453f;
   font-size: 0.9rem;
+}
+
+/* =========================================================
+   Collection page — wine background, gold-bracket frame
+   ========================================================= */
+
+.collectionPage {
+  background: #3a0f16;
+  padding: calc(var(--header-bar-height) + clamp(2.5rem, 6vw, 4.5rem))
+    clamp(1.25rem, 6vw, 4.5rem) clamp(4rem, 8vw, 6rem);
+}
+
+.collectionBanner {
+  text-align: center;
+  max-width: 34rem;
+  margin: 0 auto clamp(3rem, 7vw, 5rem);
+}
+
+.eyebrowLight {
+  color: var(--color-gold);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.collectionTitle {
+  color: var(--color-cream);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 700;
+  margin: 0.6rem 0 0.9rem;
+}
+
+.collectionSub {
+  color: rgba(244, 241, 234, 0.68);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: clamp(2rem, 3.5vw, 2.75rem);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.productCard {
+  text-align: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.imgFrame {
+  position: relative;
+  padding: 0.7rem;
+  background: rgba(244, 241, 234, 0.05);
+  border-radius: 4px;
+}
+
+.imgWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+.cornerTL,
+.cornerBR {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.cornerTL {
+  top: 0.2rem;
+  left: 0.2rem;
+  border-top: 1.5px solid var(--color-gold);
+  border-left: 1.5px solid var(--color-gold);
+}
+
+.cornerBR {
+  bottom: 0.2rem;
+  right: 0.2rem;
+  border-bottom: 1.5px solid var(--color-gold);
+  border-right: 1.5px solid var(--color-gold);
+}
+
+.productName {
+  color: var(--color-cream);
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 0.98rem;
+}
+
+.cardDivider {
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background: var(--color-gold);
+  margin: 0.5rem auto 0.6rem;
+}
+
+.productText {
+  color: rgba(244, 241, 234, 0.62);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+/* ===== Modal ===== */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 3, 4, 0.72);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 100;
+}
+
+.modalCard {
+  position: relative;
+  background: #3a0f16;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 6px;
+  max-width: 640px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.75rem;
+  animation: modalRise 0.2s ease both;
+}
+
+@media (max-width: 620px) {
+  .modalCard {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modalCard {
+    animation: none;
+  }
+}
+
+@keyframes modalRise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modalClose {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  background: none;
+  border: none;
+  color: var(--color-cream);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+}
+
+.modalClose:hover {
+  color: var(--color-gold);
+}
+
+.modalImageCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modalImageFrame {
+  position: relative;
+  padding: 0.6rem;
+  background: rgba(244, 241, 234, 0.05);
+  border-radius: 4px;
+  height: fit-content;
+}
+
+.modalImageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.thumbRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.thumb,
+.thumbActive {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 3px;
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+}
+
+.thumb {
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  opacity: 0.65;
+}
+
+.thumb:hover {
+  opacity: 1;
+}
+
+.thumbActive {
+  border: 1.5px solid var(--color-gold);
+  opacity: 1;
+}
+
+.modalText {
+  color: var(--color-cream);
+}
+
+.modalTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+
+.modalDesc {
+  color: rgba(244, 241, 234, 0.75);
+  font-size: 0.95rem;
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+
+.modalDetails {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  padding-top: 1rem;
+}
+
+.modalDetails li {
+  position: relative;
+  padding-right: 1.1rem;
+  font-size: 0.88rem;
+  color: rgba(244, 241, 234, 0.7);
+  line-height: 1.7;
+}
+
+.modalDetails li::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0.6rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-gold);
 }

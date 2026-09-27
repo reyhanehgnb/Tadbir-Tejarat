@@ -1,43 +1,104 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Header from "@/components/Header";
 import styles from "@/components/PageShell.module.css";
+import ProductGrid from "@/components/ProductGrid";
 
 export const metadata: Metadata = {
   title: "مجموعه محصولات",
-  description: "مجموعه کامل عطرهای پمپی برند شما در شیشه‌های طلایی، مشکی و زرشکی."
+  description: "مجموعه کامل عطرهای پمپی برند شما با انواع مکانیزم‌های پاشش."
 };
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const products = [
-  { src: `${basePath}/images/products/product-1.webp`, name: "مجموعه طلایی", text: "رایحه‌ای گرم با پایه‌ای از عنبر و وانیل." },
-  { src: `${basePath}/images/products/product-2.webp`, name: "مجموعه مشکی", text: "رایحه‌ای چوبی و تیره برای لحظه‌های ماندگار." },
-  { src: `${basePath}/images/products/product-3.webp`, name: "مجموعه زرشکی", text: "ترکیبی از میوه‌های سرخ و ادویه." },
-  { src: `${basePath}/images/products/product-4.webp`, name: "مجموعه دوگانه", text: "طلایی و مشکی در کنار هم." },
-  { src: `${basePath}/images/products/product-5.webp`, name: "جزئیات دست‌ساز", text: "دقتی که در هر پاشش حس می‌شود." }
+  {
+    src: `${basePath}/images/products/product-1.webp`,
+    name: "پمپ اسپری تریگر",
+    text: "پاششی قدرتمند و کنترل‌شده با یک فشار ساده.",
+    details: [
+      "مناسب برای رایحه‌های حجم‌دار و روزانه",
+      "طراحی ارگونومیک برای فشار یکدست",
+      "سازگار با اکثر بطری‌های استاندارد"
+    ],
+    subsets: [
+      { src: `${basePath}/images/products/product-1.webp`, label: "نمای کامل" },
+      { src: `${basePath}/images/products/product-6.webp`, label: "نمای نزدیک پمپ" },
+      { src: `${basePath}/images/products/product-7.webp`, label: "درب و نازل" },
+      { src: `${basePath}/images/products/product-8.webp`, label: "درب و نازل" }
+    ]
+  },
+  {
+    src: `${basePath}/images/products/product-2.webp`,
+    name: "پمپ مه‌پاش",
+    text: "پخش یکنواخت و ریز، برای پوشش کامل و رایحه‌ای ماندگار.",
+    details: [
+      "ذرات ریزتر برای پخش یکنواخت روی پوست",
+      "مناسب رایحه‌های سبک و تابستانی",
+      "کاهش مصرف عطر در هر پاشش"
+    ],
+    subsets: [
+      { src: `${basePath}/images/products/product-2.webp`, label: "نمای کامل" },
+      { src: `${basePath}/images/products/product-2-detail-1.webp`, label: "نازل مه‌پاش" }
+    ]
+  },
+  {
+    src: `${basePath}/images/products/product-3.webp`,
+    name: "پمپ غلیظ‌پاش",
+    text: "پاششی متمرکز و پرحجم، مناسب رایحه‌های سنگین.",
+    details: [
+      "مناسب رایحه‌های شرقی و چوبی",
+      "پاشش متمرکز روی نقاط پالس",
+      "ماندگاری بیشتر رایحه روی پوست و لباس"
+    ],
+    subsets: [
+      { src: `${basePath}/images/products/product-3.webp`, label: "نمای کامل" },
+      { src: `${basePath}/images/products/product-3-detail-1.webp`, label: "نمای نزدیک" }
+    ]
+  },
+  {
+    src: `${basePath}/images/products/product-4.webp`,
+    name: "پمپ رقیق‌پاش",
+    text: "پاششی سبک و ظریف، برای استفاده روزانه و ملایم.",
+    details: [
+      "مناسب استفاده مکرر در طول روز",
+      "رایحه ملایم، بدون تحمیل زیاد به فضا",
+      "پیشنهادی برای محیط‌های کاری و بسته"
+    ],
+    subsets: [
+      { src: `${basePath}/images/products/product-4.webp`, label: "نمای کامل" },
+      { src: `${basePath}/images/products/product-4-detail-1.webp`, label: "نمای نزدیک" }
+    ]
+  },
+  {
+    src: `${basePath}/images/products/product-5.webp`,
+    name: "پمپ قفل‌دار",
+    text: "طراحی ایمن با قفل ضدنشتی، مناسب برای سفر.",
+    details: [
+      "قفل ایمنی در برابر فشار ناخواسته در چمدان",
+      "مناسب برای سفرهای هوایی و جاده‌ای",
+      "بدنه مقاوم در برابر نشتی"
+    ],
+    subsets: [
+      { src: `${basePath}/images/products/product-5.webp`, label: "نمای کامل" },
+      { src: `${basePath}/images/products/product-5-detail-1.webp`, label: "مکانیزم قفل" }
+    ]
+  }
 ];
 
 export default function CollectionPage() {
   return (
     <>
       <Header />
-      <main className={styles.page}>
-        <div className={styles.banner}>
-          <p className={styles.eyebrow}>مجموعه محصولات</p>
-          <h1 className={styles.title}>همه عطرهای پمپی ما</h1>
+      <main className={styles.collectionPage}>
+        <div className={styles.collectionBanner}>
+          <p className={styles.eyebrowLight}>مجموعه محصولات</p>
+          <h1 className={styles.collectionTitle}>همه عطرهای پمپی ما</h1>
+          <p className={styles.collectionSub}>
+            هر مکانیزم پاشش، تجربه‌ای متفاوت از رایحه را برای شما می‌سازد.
+          </p>
         </div>
-        <div className={styles.grid}>
-          {products.map((item) => (
-            <div key={item.src} className={styles.card}>
-              <div className={styles.imgWrap}>
-                <Image src={item.src} alt={item.name} fill sizes="(max-width: 780px) 90vw, 30vw" style={{ objectFit: "cover" }} />
-              </div>
-              <p className={styles.cardName}>{item.name}</p>
-              <p className={styles.cardText}>{item.text}</p>
-            </div>
-          ))}
-        </div>
+
+        <ProductGrid products={products} />
       </main>
     </>
   );
