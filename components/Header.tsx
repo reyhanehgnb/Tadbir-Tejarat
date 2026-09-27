@@ -56,9 +56,13 @@ export default function Header() {
         <ul className={styles.navList}>
           {navItems.map((item) => (
             <li key={item.href}>
-              <a className={styles.navLink} href={item.href}>
+              <Link
+                className={styles.navLink}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+              >
                 {item.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
