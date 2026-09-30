@@ -120,3 +120,17 @@
 .close:hover {
   background: rgba(247, 242, 233, 0.25);
 }
+.navLayer {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 1.5s ease-in-out;
+}
+
+.navLayer[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.navLayer > * {
+  min-height: 0;
+}

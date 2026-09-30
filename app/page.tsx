@@ -2,11 +2,10 @@ import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
 import {
   StoryStatement,
-  StatsBand,
   CollectionsShowcase,
   QuoteBand,
   AboutTeaser,
-  ContactCta
+  Footer
 } from "@/components/HomeSections";
 
 export default function HomePage() {
@@ -15,11 +14,10 @@ export default function HomePage() {
       <Header />
       <HeroSlider />
       <StoryStatement />
-      <StatsBand />
       <CollectionsShowcase />
       <QuoteBand />
       <AboutTeaser />
-      <ContactCta />
+      <Footer/>
     </main>
   );
 }

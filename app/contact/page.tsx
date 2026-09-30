@@ -73,7 +73,7 @@ export default function ContactPage() {
               </li>
               <li>
                 <MailIcon />
-                <span>info@yourbrand.com</span>
+                <span>Tadbirtgm@gmail.com</span>
               </li>
               <li>
                 <MapPinIcon />

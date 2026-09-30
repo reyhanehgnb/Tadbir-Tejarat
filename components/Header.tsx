@@ -1,80 +1,76 @@
 "use client";
-
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import styles from "./Header.module.css";
-
 const navItems = [
   { label: "خانه", href: "/" },
+   { label: "محصولات", href: "/collection" },
   { label: "درباره ما", href: "/about" },
-  { label: "مجموعه", href: "/collection" },
   { label: "تماس با ما", href: "/contact" },
 ];
-
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        headerRef.current &&
-        !headerRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    }
-
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [isOpen]);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
+  const isOpen = isHovered || isFixed;
   return (
-    <header className={styles.header} ref={headerRef}>
+    <header
+      className={styles.header}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => {
+        if (!isFixed) {
+          setIsHovered(false);
+        }
+      }}
+    >
+      {" "}
       <div className={styles.barLayer} data-open={isOpen}>
-        <span className={styles.logo}>تدبیر تجارت</span>
+        {" "}
+        <span className={styles.logo}>تدبیر تجارت</span>{" "}
         <button
           type="button"
           className={styles.toggle}
           aria-expanded={isOpen}
           aria-controls="primary-navigation"
-          aria-label="باز کردن منو"
-          onClick={() => setIsOpen(true)}
+          aria-label={isFixed ? "باز کردن منو به حالت عادی" : "ثابت کردن منو"}
+          onClick={() => setIsFixed((prev) => !prev)}
         >
-          <span className={styles.toggleLine} />
-          <span className={styles.toggleLine} />
-          <span className={styles.toggleLine} />
-        </button>
-      </div>
-
+          {" "}
+          <span className={styles.toggleLine} />{" "}
+          <span className={styles.toggleLine} />{" "}
+          <span className={styles.toggleLine} />{" "}
+        </button>{" "}
+      </div>{" "}
       <nav
         id="primary-navigation"
         className={styles.navLayer}
         data-open={isOpen}
       >
+        {" "}
         <ul className={styles.navList}>
+          {" "}
           {navItems.map((item) => (
             <li key={item.href}>
-              <Link
-                className={styles.navLink}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </Link>
+              {" "}
+              <Link className={styles.navLink} href={item.href}>
+                {" "}
+                {item.label}{" "}
+              </Link>{" "}
             </li>
-          ))}
-        </ul>
+          ))}{" "}
+        </ul>{" "}
         <button
           type="button"
           className={styles.close}
           aria-label="بستن منو"
-          onClick={() => setIsOpen(false)}
+          onClick={() => {
+            setIsFixed(false);
+            setIsHovered(false);
+          }}
         >
-          ×
-        </button>
-      </nav>
+          {" "}
+          ×{" "}
+        </button>{" "}
+      </nav>{" "}
     </header>
   );
 }
