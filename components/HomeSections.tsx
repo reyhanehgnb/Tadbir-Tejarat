@@ -378,9 +378,9 @@ export function Footer() {
 
         <div className={styles.footerCol}>
           <p className={styles.footerColTitle}>تماس با ما</p>
-          <p className={styles.footerContactItem}>
+          <a className={styles.footerContactItem}>
             قزوین ، خیابان طالقانی ، برج خلیج فارس
-          </p>
+          </a>
           <a
             className={styles.footerContactItem}
             href="tel:+982100000000"

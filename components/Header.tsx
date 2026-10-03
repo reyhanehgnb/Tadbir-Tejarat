@@ -12,6 +12,7 @@ export default function Header() {
   const [isHovered, setIsHovered] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
   const isOpen = isHovered || isFixed;
+
   return (
     <header
       className={styles.header}
@@ -22,10 +23,8 @@ export default function Header() {
         }
       }}
     >
-      {" "}
       <div className={styles.barLayer} data-open={isOpen}>
-        {" "}
-        <span className={styles.logo}>تدبیر تجارت</span>{" "}
+        <span className={styles.logo}>تدبیر تجارت</span>
         <button
           type="button"
           className={styles.toggle}
@@ -34,43 +33,40 @@ export default function Header() {
           aria-label={isFixed ? "باز کردن منو به حالت عادی" : "ثابت کردن منو"}
           onClick={() => setIsFixed((prev) => !prev)}
         >
-          {" "}
-          <span className={styles.toggleLine} />{" "}
-          <span className={styles.toggleLine} />{" "}
-          <span className={styles.toggleLine} />{" "}
-        </button>{" "}
-      </div>{" "}
+          <span className={styles.toggleLine} />
+          <span className={styles.toggleLine} />
+          <span className={styles.toggleLine} />
+        </button>
+      </div>
+
       <nav
         id="primary-navigation"
         className={styles.navLayer}
         data-open={isOpen}
       >
-        {" "}
-        <ul className={styles.navList}>
-          {" "}
-          {navItems.map((item) => (
-            <li key={item.href}>
-              {" "}
-              <Link className={styles.navLink} href={item.href}>
-                {" "}
-                {item.label}{" "}
-              </Link>{" "}
-            </li>
-          ))}{" "}
-        </ul>{" "}
-        <button
-          type="button"
-          className={styles.close}
-          aria-label="بستن منو"
-          onClick={() => {
-            setIsFixed(false);
-            setIsHovered(false);
-          }}
-        >
-          {" "}
-          ×{" "}
-        </button>{" "}
-      </nav>{" "}
+        <div className={styles.navInner}>
+          <ul className={styles.navList}>
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <Link className={styles.navLink} href={item.href}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            className={styles.close}
+            aria-label="بستن منو"
+            onClick={() => {
+              setIsFixed(false);
+              setIsHovered(false);
+            }}
+          >
+            ×
+          </button>
+        </div>
+      </nav>
     </header>
   );
 }

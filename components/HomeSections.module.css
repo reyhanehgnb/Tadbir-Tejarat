@@ -538,7 +538,7 @@
 }
 
 .footerTagline {
-  color: var(--color-steel);
+  color: var(--color-steel-light);
   line-height: 1.8;
   font-size: 0.86rem;
   max-width: 380px;
@@ -590,7 +590,7 @@
 }
 
 .footerCol a {
-  color: var(--color-steel);
+  color: var(--color-steel-light);
   text-decoration: none;
   font-size: 0.85rem;
   width: fit-content;
@@ -613,7 +613,6 @@ a.footerContactItem:hover {
 }
 
 .footerBottom {
-  border-top: 1px solid var(--color-line);
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px 32px;
@@ -621,7 +620,7 @@ a.footerContactItem:hover {
   justify-content: space-between;
   align-items: center;
   font-size: 0.76rem;
-  color: var(--color-steel);
+  color: var(--color-steel-light);
 }
 
 @media (max-width: 560px) {

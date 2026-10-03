@@ -1,55 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import Header from "@/components/Header";   
+import Header from "@/components/Header";
 import styles from "@/components/PageShell.module.css";
 
-type AuthMode = "signup" | "signin";
-
 export default function ContactPage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState<{ name: string } | null>(null);
-
-  const [authMode, setAuthMode] = useState<AuthMode>("signin");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [authStatus, setAuthStatus] = useState<"idle" | "loading" | "error">("idle");
-
   const [subject, setSubject] = useState("");
   const [messageBody, setMessageBody] = useState("");
-  const [msgStatus, setMsgStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [senderName, setSenderName] = useState("");
+  const [senderEmail, setSenderEmail] = useState("");
 
-  async function handleAuth(e: React.FormEvent) {
+  function handleSendMessage(e: React.FormEvent) {
     e.preventDefault();
-    setAuthStatus("loading");
-    try {
-      // TODO: no backend yet
-      // if (authMode === "signup") {
-      //   await fetch("/api/auth/signup", { method: "POST", body: JSON.stringify({ name, email, password }) });
-      // } else {
-      //   await fetch("/api/auth/signin", { method: "POST", body: JSON.stringify({ email, password }) });
-      // }
-      await new Promise((r) => setTimeout(r, 700));
-      setCurrentUser({ name: name || email.split("@")[0] });
-      setIsLoggedIn(true);
-      setAuthStatus("idle");
-    } catch {
-      setAuthStatus("error");
-    }
-  }
-
-  async function handleSendMessage(e: React.FormEvent) {
-    e.preventDefault();
-    setMsgStatus("loading");
-    try {
-      await new Promise((r) => setTimeout(r, 700));
-      setMsgStatus("success");
-      setSubject("");
-      setMessageBody("");
-    } catch {
-      setMsgStatus("error");
-    }
+    const body = `نام: ${senderName}\nایمیل: ${senderEmail}\n\n${messageBody}`;
+    const mailtoUrl = `mailto:Tadbirtgm@gmail.com?subject=${encodeURIComponent(
+      subject || "پیام از وب‌سایت"
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoUrl;
   }
 
   return (
@@ -62,24 +29,9 @@ export default function ContactPage() {
             <p className={styles.eyebrow}>تماس با ما</p>
             <h1 className={styles.heroTitle}>گفت‌وگو را با ما شروع کنید</h1>
             <p className={styles.heroText}>
-              برای سفارش‌های سازمانی، همکاری تجاری یا هر پرسشی، تیم ما در
-              کنار شماست.
+              برای سفارش‌های سازمانی، همکاری تجاری یا هر پرسشی، تیم ما در کنار
+              شماست.
             </p>
-
-            <ul className={styles.quickContact}>
-              <li>
-                <PhoneIcon />
-                <span>۰۲۸-۳۳۰۰۰۰۰</span>
-              </li>
-              <li>
-                <MailIcon />
-                <span>Tadbirtgm@gmail.com</span>
-              </li>
-              <li>
-                <MapPinIcon />
-                <span>قزوین ، ایران</span>
-              </li>
-            </ul>
           </div>
         </section>
 
@@ -88,8 +40,8 @@ export default function ContactPage() {
             <p className={styles.eyebrow}>دفتر مرکزی</p>
             <h2 className={styles.panelTitle}>به ما سر بزنید</h2>
             <p className={styles.heroText}>
-              دفتر ما در قلب قزوین پذیرای شماست. برای هماهنگی جلسه حضوری
-              پیش از مراجعه با ما تماس بگیرید.
+              دفتر ما در قلب قزوین پذیرای شماست. برای هماهنگی جلسه حضوری پیش از
+              مراجعه با ما تماس بگیرید.
             </p>
 
             <dl className={styles.infoList}>
@@ -102,6 +54,14 @@ export default function ContactPage() {
                 <dd>شنبه تا پنج‌شنبه، ۸:۰۰ تا ۱۷:۰۰</dd>
               </div>
               <div className={styles.infoRow}>
+                <dt>شماره تماس</dt>
+                <dd>۰۲۸-۳۳۰۰۰۰۰</dd>
+              </div>
+              <div className={styles.infoRow}>
+                <dt>ایمیل</dt>
+                <dd>Tadbirtgm@gmail.com</dd>
+              </div>
+              <div className={styles.infoRow}>
                 <dt>پشتیبانی</dt>
                 <dd>پاسخ به ایمیل در کمتر از ۲۴ ساعت</dd>
               </div>
@@ -109,116 +69,90 @@ export default function ContactPage() {
 
             <OfficeMap />
           </div>
+          <div className={styles.infoPanel}>
+            <p className={styles.eyebrow}>کارخانه ما</p>
+            <h2 className={styles.panelTitle}>در جریان مراحل تولید باشید</h2>
+            <p className={styles.heroText}>
+              کیفیت را از نزدیک ببینید؛ برای بازدید از خط تولید و سفارش‌های
+              عمده، تیم ما منتظر حضور شماست.
+            </p>
 
-          <div className={styles.formPanel}>
-            {!isLoggedIn ? (
-              <>
-                <p className={styles.eyebrow}>برای ارسال پیام</p>
-                <h2 className={styles.panelTitle}>
-                  {authMode === "signin" ? "ورود به حساب کاربری" : "ساخت حساب کاربری"}
-                </h2>
-                <p className={styles.heroText}>
-                  برای تماس مستقیم با تیم ما، ابتدا وارد حساب خود شوید.
-                </p>
+            <dl className={styles.infoList}>
+              <div className={styles.infoRow}>
+                <dt>آدرس</dt>
+                <dd>قزوین ، خیابان طالقانی ، برج خلیج فارس</dd>
+              </div>
+              <div className={styles.infoRow}>
+                <dt>ساعات کاری</dt>
+                <dd>شنبه تا پنج‌شنبه، ۸:۰۰ تا ۱۷:۰۰</dd>
+              </div>
+              <div className={styles.infoRow}>
+                <dt>شماره تماس</dt>
+                <dd>۰۲۸-۳۳۰۰۰۰۰</dd>
+              </div>
+              <div className={styles.infoRow}>
+                <dt>ایمیل</dt>
+                <dd>Tadbirtgm@gmail.com</dd>
+              </div>
+              <div className={styles.infoRow}>
+                <dt>پشتیبانی</dt>
+                <dd>پاسخ به ایمیل در کمتر از ۲۴ ساعت</dd>
+              </div>
+            </dl>
 
-                <div className={styles.authSwitch}>
-                  <button
-                    type="button"
-                    onClick={() => setAuthMode("signin")}
-                    className={authMode === "signin" ? styles.authTabActive : styles.authTab}
-                  >
-                    ورود
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAuthMode("signup")}
-                    className={authMode === "signup" ? styles.authTabActive : styles.authTab}
-                  >
-                    ثبت‌نام
-                  </button>
-                </div>
+            <OfficeMap />
+          </div>
+        </section>
 
-                <form onSubmit={handleAuth} className={styles.form}>
-                  {authMode === "signup" && (
-                    <label className={styles.field}>
-                      <span>نام</span>
-                      <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        className={styles.input}
-                      />
-                    </label>
-                  )}
-                  <label className={styles.field}>
-                    <span>ایمیل</span>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className={styles.input}
-                    />
-                  </label>
-                  <label className={styles.field}>
-                    <span>رمز عبور</span>
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      minLength={6}
-                      className={styles.input}
-                    />
-                  </label>
+        <section className={styles.formSection}>
+          <div className={styles.formInner}>
+            <p className={styles.eyebrow}>پیام مستقیم</p>
+            <h2 className={styles.panelTitle}>برای ما بنویسید</h2>
+            <p className={styles.heroText}>
+              تیم ما آماده برقراری ارتباط و پاسخگویی در کوتاه ترین زمان ممکن با شما است.
+            </p>
 
-                  <button type="submit" disabled={authStatus === "loading"} className={styles.submitButton}>
-                    {authStatus === "loading" ? "در حال بررسی..." : authMode === "signin" ? "ورود" : "ساخت حساب"}
-                  </button>
-                </form>
+            <form className={styles.contactForm} onSubmit={handleSendMessage}>
+              <div className={styles.formRow}>
+                <input
+                  type="text"
+                  placeholder="نام شما"
+                  value={senderName}
+                  onChange={(e) => setSenderName(e.target.value)}
+                  required
+                  className={styles.formInput}
+                />
+                <input
+                  type="email"
+                  placeholder="ایمیل شما"
+                  value={senderEmail}
+                  onChange={(e) => setSenderEmail(e.target.value)}
+                  required
+                  className={styles.formInput}
+                />
+              </div>
 
-                {authStatus === "error" && (
-                  <p className={styles.errorMsg}>مشکلی پیش آمد، دوباره تلاش کنید.</p>
-                )}
-              </>
-            ) : (
-              <>
-                <p className={styles.eyebrow}>خوش آمدید، {currentUser?.name}</p>
-                <h2 className={styles.panelTitle}>پیام خود را بنویسید</h2>
-                <p className={styles.heroText}>پیام شما مستقیم به تیم پشتیبانی ما می‌رسد.</p>
+              <input
+                type="text"
+                placeholder="موضوع"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                className={styles.formInput}
+              />
 
-                <form onSubmit={handleSendMessage} className={styles.form}>
-                  <label className={styles.field}>
-                    <span>موضوع</span>
-                    <input
-                      type="text"
-                      value={subject}
-                      onChange={(e) => setSubject(e.target.value)}
-                      required
-                      className={styles.input}
-                    />
-                  </label>
-                  <label className={styles.field}>
-                    <span>پیام</span>
-                    <textarea
-                      value={messageBody}
-                      onChange={(e) => setMessageBody(e.target.value)}
-                      required
-                      rows={5}
-                      className={styles.textarea}
-                    />
-                  </label>
+              <textarea
+                placeholder="متن پیام شما"
+                value={messageBody}
+                onChange={(e) => setMessageBody(e.target.value)}
+                required
+                rows={5}
+                className={styles.formTextarea}
+              />
 
-                  <button type="submit" disabled={msgStatus === "loading"} className={styles.submitButton}>
-                    {msgStatus === "loading" ? "در حال ارسال..." : "ارسال پیام"}
-                  </button>
-                </form>
-
-                {msgStatus === "success" && <p className={styles.successMsg}>پیام شما ارسال شد.</p>}
-                {msgStatus === "error" && <p className={styles.errorMsg}>ارسال پیام ناموفق بود.</p>}
-              </>
-            )}
+              <button type="submit" className={styles.formSubmit}>
+                ارسال پیام
+              </button>
+            </form>
           </div>
         </section>
       </main>
@@ -228,7 +162,12 @@ export default function ContactPage() {
 
 function HeroPattern() {
   return (
-    <svg className="heroPatternSvg" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <svg
+      className="heroPatternSvg"
+      viewBox="0 0 1200 500"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+    >
       <defs>
         <radialGradient id="goldGlow" cx="80%" cy="20%" r="60%">
           <stop offset="0%" stopColor="var(--color-gold)" stopOpacity="0.25" />
@@ -268,14 +207,28 @@ function OfficeMap() {
 
 function PhoneIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+    >
       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
     </svg>
   );
 }
 function MailIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+    >
       <path d="M4 4h16v16H4z" />
       <path d="M22 6l-10 7L2 6" />
     </svg>
@@ -283,7 +236,14 @@ function MailIcon() {
 }
 function MapPinIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+    >
       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
       <circle cx="12" cy="10" r="3" />
     </svg>
