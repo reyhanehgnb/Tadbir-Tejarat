@@ -13,7 +13,9 @@
   align-items: center;
   justify-content: space-between;
   padding-inline: clamp(1.25rem, 4vw, 3rem);
-  transition: opacity 0.4s ease, visibility 0.4s ease;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
 }
 
 .barLayer[data-open="true"] {
@@ -81,7 +83,9 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
   transition-delay: 0.1s;
 }
 
@@ -116,6 +120,57 @@
   color: var(--color-gold-soft);
 }
 
+.navItem {
+  position: relative;
+}
+
+.subList {
+  list-style: none;
+  position: absolute;
+  top: calc(100% + 0.9rem);
+  right: 0;
+  min-width: 12rem;
+  padding: 0.6rem 0;
+  background: rgba(25, 20, 15, 0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(182, 134, 58, 0.25);
+  border-radius: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.6s ease;
+}
+
+.subList::before {
+  content: "";
+  position: absolute;
+  inset: -0.9rem 0 auto;
+  height: 0.9rem;
+}
+
+.navItem:hover > .subList,
+.navItem:focus-within > .subList {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0.15s;
+}
+
+.subLink {
+  display: block;
+  padding: 0.55rem 1.3rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  color: var(--color-cream);
+  transition: all 0.3s ease;
+}
+
+.subLink:hover {
+  color: var(--color-gold-soft);
+  background: rgba(247, 242, 233, 0.08);
+}
+
+/* ---------- Close button ---------- */
 .close {
   width: 40px;
   height: 40px;

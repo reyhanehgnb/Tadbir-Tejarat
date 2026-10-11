@@ -3,38 +3,27 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import styles from "./Reveal.module.css";
 
-type RevealProps = {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-  distance?: "small" | "medium";
-};
-
 export default function Reveal({
   children,
   className = "",
   delay = 0,
   distance = "medium",
-}: RevealProps) {
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  distance?: "small" | "medium";
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.14, rootMargin: "0px 0px -50px" }
+    const io = new IntersectionObserver(
+      ([e]) => e.isIntersecting && (setVisible(true), io.disconnect()),
+      { threshold: 0.14, rootMargin: "0px 0px -50px" },
     );
-
-    observer.observe(element);
-    return () => observer.disconnect();
+    io.observe(ref.current!);
+    return () => io.disconnect();
   }, []);
 
   return (

@@ -1,107 +1,141 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import "leaflet/dist/leaflet.css";
 import Header from "@/components/Header";
 import styles from "@/components/PageShell.module.css";
 
-export default function ContactPage() {
-  const [subject, setSubject] = useState("");
-  const [messageBody, setMessageBody] = useState("");
-  const [senderName, setSenderName] = useState("");
-  const [senderEmail, setSenderEmail] = useState("");
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const MARKER_COLOR = "#e11d48";
 
-  function handleSendMessage(e: React.FormEvent) {
+const INFO_ROWS = [
+  ["آدرس", "قزوین ، خیابان طالقانی ، برج خلیج فارس"],
+  ["ساعات کاری", "شنبه تا پنج‌شنبه، ۸:۰۰ تا ۱۷:۰۰"],
+  ["شماره تماس", "۰۲۸-۳۳۰۰۰۰۰"],
+  ["ایمیل", "Tadbirtgm@gmail.com"],
+  ["پشتیبانی", "پاسخ به ایمیل در کمتر از ۲۴ ساعت"],
+];
+
+const PANELS = [
+  {
+    eyebrow: "دفتر مرکزی",
+    title: "به ما سر بزنید",
+    text: "دفتر ما در قلب قزوین پذیرای شماست. برای هماهنگی جلسه حضوری پیش از مراجعه با ما تماس بگیرید.",
+    map: "نقشه دفتر مرکزی",
+    lat: 36.2691723,
+    lon: 50.005753,
+  },
+  {
+    eyebrow: "کارخانه ما",
+    title: "در جریان مراحل تولید باشید",
+    text: "کیفیت را از نزدیک ببینید؛ برای بازدید از خط تولید و سفارش‌های عمده، تیم ما منتظر حضور شماست.",
+    map: "نقشه کارخانه",
+    lat: 36.2688,
+    lon: 50.0041,
+  },
+];
+
+function OfficeMap({ lat, lon, title }: { lat: number; lon: number; title: string }) {
+  const [open, setOpen] = useState(false);
+  const el = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open || !el.current) return;
+    let map: any;
+    let off = false;
+
+    (async () => {
+      const L = (await import("leaflet")).default;
+      if (off || !el.current) return;
+      map = L.map(el.current).setView([lat, lon], 17);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
+      const icon = L.divIcon({
+        className: "",
+        iconSize: [34, 34],
+        iconAnchor: [17, 34],
+        html: `<svg width="34" height="34" viewBox="0 0 24 24" fill="${MARKER_COLOR}" stroke="#fff" stroke-width="1"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>`,
+      });
+      L.marker([lat, lon], { icon, title }).addTo(map);
+    })();
+
+    return () => {
+      off = true;
+      map?.remove();
+    };
+  }, [open, lat, lon, title]);
+
+  return (
+    <div className={styles.mapWrap}>
+      {open ? (
+        <div ref={el} className={styles.mapFrame} aria-label={title} />
+      ) : (
+        <button type="button" className={styles.mapPlaceholder} onClick={() => setOpen(true)}>
+          نمایش نقشه
+        </button>
+      )}
+      <a
+        href={`https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        مشاهده مسیر و موقعیت روی نقشه
+      </a>
+    </div>
+  );
+}
+
+export default function ContactPage() {
+  const [f, setF] = useState({ name: "", email: "", subject: "", message: "" });
+  const set =
+    (k: keyof typeof f) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setF({ ...f, [k]: e.target.value });
+
+  function send(e: React.FormEvent) {
     e.preventDefault();
-    const body = `نام: ${senderName}\nایمیل: ${senderEmail}\n\n${messageBody}`;
-    const mailtoUrl = `mailto:Tadbirtgm@gmail.com?subject=${encodeURIComponent(
-      subject || "پیام از وب‌سایت"
+    const body = `نام: ${f.name}\nایمیل: ${f.email}\n\n${f.message}`;
+    window.location.href = `mailto:Tadbirtgm@gmail.com?subject=${encodeURIComponent(
+      f.subject || "پیام از وب‌سایت",
     )}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoUrl;
   }
 
   return (
     <>
       <Header />
       <main className={styles.contactPage}>
-        <section className={styles.hero}>
-          <HeroPattern />
+        <section
+          className={styles.hero}
+          style={{ backgroundImage: `url(${basePath}/images/backgrounds/bg-01.png)` }}
+        >
           <div className={styles.heroInner}>
             <p className={styles.eyebrow}>تماس با ما</p>
             <h1 className={styles.heroTitle}>گفت‌وگو را با ما شروع کنید</h1>
             <p className={styles.heroText}>
-              برای سفارش‌های سازمانی، همکاری تجاری یا هر پرسشی، تیم ما در کنار
-              شماست.
+              برای سفارش‌های سازمانی، همکاری تجاری یا هر پرسشی، تیم ما در کنار شماست.
             </p>
           </div>
         </section>
 
         <section className={styles.contactSection}>
-          <div className={styles.infoPanel}>
-            <p className={styles.eyebrow}>دفتر مرکزی</p>
-            <h2 className={styles.panelTitle}>به ما سر بزنید</h2>
-            <p className={styles.heroText}>
-              دفتر ما در قلب قزوین پذیرای شماست. برای هماهنگی جلسه حضوری پیش از
-              مراجعه با ما تماس بگیرید.
-            </p>
-
-            <dl className={styles.infoList}>
-              <div className={styles.infoRow}>
-                <dt>آدرس</dt>
-                <dd>قزوین ، خیابان طالقانی ، برج خلیج فارس</dd>
-              </div>
-              <div className={styles.infoRow}>
-                <dt>ساعات کاری</dt>
-                <dd>شنبه تا پنج‌شنبه، ۸:۰۰ تا ۱۷:۰۰</dd>
-              </div>
-              <div className={styles.infoRow}>
-                <dt>شماره تماس</dt>
-                <dd>۰۲۸-۳۳۰۰۰۰۰</dd>
-              </div>
-              <div className={styles.infoRow}>
-                <dt>ایمیل</dt>
-                <dd>Tadbirtgm@gmail.com</dd>
-              </div>
-              <div className={styles.infoRow}>
-                <dt>پشتیبانی</dt>
-                <dd>پاسخ به ایمیل در کمتر از ۲۴ ساعت</dd>
-              </div>
-            </dl>
-
-            <OfficeMap />
-          </div>
-          <div className={styles.infoPanel}>
-            <p className={styles.eyebrow}>کارخانه ما</p>
-            <h2 className={styles.panelTitle}>در جریان مراحل تولید باشید</h2>
-            <p className={styles.heroText}>
-              کیفیت را از نزدیک ببینید؛ برای بازدید از خط تولید و سفارش‌های
-              عمده، تیم ما منتظر حضور شماست.
-            </p>
-
-            <dl className={styles.infoList}>
-              <div className={styles.infoRow}>
-                <dt>آدرس</dt>
-                <dd>قزوین ، خیابان طالقانی ، برج خلیج فارس</dd>
-              </div>
-              <div className={styles.infoRow}>
-                <dt>ساعات کاری</dt>
-                <dd>شنبه تا پنج‌شنبه، ۸:۰۰ تا ۱۷:۰۰</dd>
-              </div>
-              <div className={styles.infoRow}>
-                <dt>شماره تماس</dt>
-                <dd>۰۲۸-۳۳۰۰۰۰۰</dd>
-              </div>
-              <div className={styles.infoRow}>
-                <dt>ایمیل</dt>
-                <dd>Tadbirtgm@gmail.com</dd>
-              </div>
-              <div className={styles.infoRow}>
-                <dt>پشتیبانی</dt>
-                <dd>پاسخ به ایمیل در کمتر از ۲۴ ساعت</dd>
-              </div>
-            </dl>
-
-            <OfficeMap />
-          </div>
+          {PANELS.map((p) => (
+            <div key={p.eyebrow} className={styles.infoPanel}>
+              <p className={styles.eyebrow}>{p.eyebrow}</p>
+              <h2 className={styles.panelTitle}>{p.title}</h2>
+              <p className={styles.heroText}>{p.text}</p>
+              <dl className={styles.infoList}>
+                {INFO_ROWS.map(([label, value]) => (
+                  <div key={label} className={styles.infoRow}>
+                    <dt>{label}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))}
+              </dl>
+              <OfficeMap lat={p.lat} lon={p.lon} title={p.map} />
+            </div>
+          ))}
         </section>
 
         <section className={styles.formSection}>
@@ -112,43 +146,38 @@ export default function ContactPage() {
               تیم ما آماده برقراری ارتباط و پاسخگویی در کوتاه ترین زمان ممکن با شما است.
             </p>
 
-            <form className={styles.contactForm} onSubmit={handleSendMessage}>
+            <form className={styles.contactForm} onSubmit={send}>
               <div className={styles.formRow}>
                 <input
-                  type="text"
-                  placeholder="نام شما"
-                  value={senderName}
-                  onChange={(e) => setSenderName(e.target.value)}
-                  required
                   className={styles.formInput}
+                  placeholder="نام شما"
+                  value={f.name}
+                  onChange={set("name")}
+                  required
                 />
                 <input
+                  className={styles.formInput}
                   type="email"
                   placeholder="ایمیل شما"
-                  value={senderEmail}
-                  onChange={(e) => setSenderEmail(e.target.value)}
+                  value={f.email}
+                  onChange={set("email")}
                   required
-                  className={styles.formInput}
                 />
               </div>
-
               <input
-                type="text"
-                placeholder="موضوع"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
                 className={styles.formInput}
+                placeholder="موضوع"
+                value={f.subject}
+                onChange={set("subject")}
               />
-
               <textarea
-                placeholder="متن پیام شما"
-                value={messageBody}
-                onChange={(e) => setMessageBody(e.target.value)}
-                required
-                rows={5}
                 className={styles.formTextarea}
+                placeholder="متن پیام شما"
+                value={f.message}
+                onChange={set("message")}
+                rows={5}
+                required
               />
-
               <button type="submit" className={styles.formSubmit}>
                 ارسال پیام
               </button>
@@ -157,95 +186,5 @@ export default function ContactPage() {
         </section>
       </main>
     </>
-  );
-}
-
-function HeroPattern() {
-  return (
-    <svg
-      className="heroPatternSvg"
-      viewBox="0 0 1200 500"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden="true"
-    >
-      <defs>
-        <radialGradient id="goldGlow" cx="80%" cy="20%" r="60%">
-          <stop offset="0%" stopColor="var(--color-gold)" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="var(--color-gold)" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <rect width="1200" height="500" fill="url(#goldGlow)" />
-      {Array.from({ length: 6 }).map((_, i) => (
-        <path
-          key={i}
-          d={`M ${-100 + i * 220} 500 C ${150 + i * 220} 250, ${250 + i * 220} 250, ${500 + i * 220} 0`}
-          stroke="var(--color-gold)"
-          strokeOpacity="0.12"
-          strokeWidth="1"
-          fill="none"
-        />
-      ))}
-    </svg>
-  );
-}
-
-function OfficeMap() {
-  const plusCode = "7297+4F7 Qazvin, Qazvin Province, Iran";
-  return (
-    <div className={styles.mapWrap}>
-      <iframe
-        className={styles.mapFrame}
-        src={`https://www.google.com/maps?q=${encodeURIComponent(plusCode)}&z=12&output=embed`}
-        title="نقشه دفتر مرکزی"
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        allowFullScreen
-      />
-    </div>
-  );
-}
-
-function PhoneIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-    >
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-    </svg>
-  );
-}
-function MailIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-    >
-      <path d="M4 4h16v16H4z" />
-      <path d="M22 6l-10 7L2 6" />
-    </svg>
-  );
-}
-function MapPinIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-    >
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
   );
 }
