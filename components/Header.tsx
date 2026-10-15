@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Header.module.css";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const navItems = [
   { label: "خانه", href: "/" },
   {
@@ -40,13 +41,13 @@ export default function Header() {
       onMouseLeave={() => setHover(fixed)}
     >
       <div className={styles.barLayer} data-open={open}>
-        <Image
-          src="/images/logo/Logo.webp"
-          alt="Tadbir Tejarat Mana Gostareh"
-          width={160}
-          height={80}
-          className={styles.logo}
-        />
+          <Image
+            src={`${basePath}/images/logo/Logo.webp`}
+            alt="Tadbir Tejarat Mana Gostareh"
+            width={160}
+            height={80}
+            className={styles.logo}
+          />
         <button
           className={styles.toggle}
           aria-label="منو"
