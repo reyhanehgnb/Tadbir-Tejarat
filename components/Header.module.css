@@ -25,12 +25,10 @@
 }
 
 .logo {
-  font-size: clamp(1rem, 2vw, 1rem);
-  font-weight: 700;
-  color: var(--color-gold-soft);
-  background-color: var(--color-crimson);
-  padding: 12px;
-  border-radius: 50%;
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .toggle {
@@ -70,6 +68,7 @@
   100% {
     box-shadow: 0 0 0 0 rgba(182, 134, 58, 0.5);
   }
+
   50% {
     box-shadow: 0 0 0 12px rgba(182, 134, 58, 0);
   }
@@ -124,53 +123,103 @@
   position: relative;
 }
 
-.subList {
+.subList,
+.nestedSubList {
   list-style: none;
   position: absolute;
   top: calc(100% + 0.9rem);
   right: 0;
   min-width: 12rem;
   padding: 0.6rem 0;
-  background: rgba(25, 20, 15, 0.92);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(182, 134, 58, 0.25);
+  margin: 0;
+  border: 1px solid rgba(182, 134, 58, 0.35);
   border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.6s ease;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    visibility 0s linear 0.35s;
+  z-index: 1000;
 }
 
+.subList {
+  background: #19140f;
+}
+.nestedSubList {
+  top: 0;
+  right: 100%;
+  margin-right: 0.35rem;
+  background: #e9dfcd;
+  border-color: rgba(25, 20, 15, 0.12);
+  border-radius: 10px;
+  transform: translateX(8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.nestedSubList .subLink {
+  color: #30251b;
+}
+
+.nestedSubList .subLink:hover {
+  color: var(--color-gold-soft);
+  background: var(--color-ink);
+}
 .subList::before {
   content: "";
   position: absolute;
-  inset: -0.9rem 0 auto;
+  top: -0.9rem;
+  right: 0;
+  left: 0;
   height: 0.9rem;
+}
+
+.nestedSubList::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -0.45rem;
+  width: 0.45rem;
+  height: 100%;
 }
 
 .navItem:hover > .subList,
 .navItem:focus-within > .subList {
   opacity: 1;
   visibility: visible;
-  transform: none;
-  transition-delay: 0.15s;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.navItem:hover > .nestedSubList,
+.navItem:focus-within > .nestedSubList {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
+  transition-delay: 0s;
 }
 
 .subLink {
   display: block;
-  padding: 0.55rem 1.3rem;
+  padding: 0.65rem 1.1rem;
+  color: var(--color-cream);
   font-size: 0.9rem;
   white-space: nowrap;
-  color: var(--color-cream);
-  transition: all 0.3s ease;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
 }
 
 .subLink:hover {
   color: var(--color-gold-soft);
-  background: rgba(247, 242, 233, 0.08);
+  background: rgba(217, 184, 118, 0.08);
 }
 
-/* ---------- Close button ---------- */
 .close {
   width: 40px;
   height: 40px;

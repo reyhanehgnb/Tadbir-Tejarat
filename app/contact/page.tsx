@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import styles from "@/components/PageShell.module.css";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const MARKER_COLOR = "#e11d48";
+const MARKER_COLOR = "#f00034";
 
 const INFO_ROWS = [
   ["آدرس", "قزوین ، خیابان طالقانی ، برج خلیج فارس"],
@@ -47,18 +47,23 @@ function OfficeMap({ lat, lon, title }: { lat: number; lon: number; title: strin
     (async () => {
       const L = (await import("leaflet")).default;
       if (off || !el.current) return;
-      map = L.map(el.current).setView([lat, lon], 17);
+
+      map = L.map(el.current, { zoomControl: false, scrollWheelZoom: false }).setView([lat, lon], 13);
+      L.control.zoom({ position: "bottomleft" }).addTo(map);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution: "© OpenStreetMap",
       }).addTo(map);
+
       const icon = L.divIcon({
         className: "",
         iconSize: [34, 34],
         iconAnchor: [17, 34],
-        html: `<svg width="34" height="34" viewBox="0 0 24 24" fill="${MARKER_COLOR}" stroke="#fff" stroke-width="1"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>`,
+        html: `<span class="${styles.pulse}"></span><svg width="34" height="34" viewBox="0 0 24 24" fill="${MARKER_COLOR}" stroke="#fff" stroke-width="1"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>`,
       });
       L.marker([lat, lon], { icon, title }).addTo(map);
+
+      map.flyTo([lat, lon], 17, { duration: 2.2 }); 
     })();
 
     return () => {
@@ -69,13 +74,16 @@ function OfficeMap({ lat, lon, title }: { lat: number; lon: number; title: strin
 
   return (
     <div className={styles.mapWrap}>
-      {open ? (
-        <div ref={el} className={styles.mapFrame} aria-label={title} />
-      ) : (
-        <button type="button" className={styles.mapPlaceholder} onClick={() => setOpen(true)}>
-          نمایش نقشه
-        </button>
-      )}
+      <div className={styles.mapBox}>
+        {open ? (
+          <div ref={el} className={styles.mapFrame} aria-label={title} />
+        ) : (
+          <button type="button" className={styles.mapPlaceholder} onClick={() => setOpen(true)}>
+            نمایش نقشه
+          </button>
+        )}
+        <span className={styles.mapCard}>{title}</span>
+      </div>
       <a
         href={`https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}`}
         target="_blank"
@@ -108,7 +116,7 @@ export default function ContactPage() {
       <main className={styles.contactPage}>
         <section
           className={styles.hero}
-          style={{ backgroundImage: `url(${basePath}/images/backgrounds/bg-01.png)` }}
+          style={{ backgroundImage: `url(${basePath}/images/backgrounds/bg-1.webp)` }}
         >
           <div className={styles.heroInner}>
             <p className={styles.eyebrow}>تماس با ما</p>

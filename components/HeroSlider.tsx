@@ -50,6 +50,12 @@ const N = slides.length;
 
 export default function HeroSlider() {
   const [active, setActive] = useState(0);
+  // slides whose image is allowed to load (current + next one)
+  const [seen, setSeen] = useState<number[]>([0]);
+
+  useEffect(() => {
+    setSeen((s) => [...new Set([...s, active, (active + 1) % N])]);
+  }, [active]);
 
   useEffect(() => {
     const t = setTimeout(() => setActive((a) => (a + 1) % N), AUTOPLAY_DELAY);
@@ -62,14 +68,16 @@ export default function HeroSlider() {
     <section className={styles.hero} aria-label="محصولات ویژه">
       {slides.map((s, i) => (
         <div key={s.src} className={styles.slide} data-active={i === active}>
-          <Image
-            src={s.src}
-            alt={s.alt}
-            fill
-            sizes="100vw"
-            className={styles.slideImg}
-            priority={i === 0}
-          />
+          {seen.includes(i) && (
+            <Image
+              src={s.src}
+              alt={s.alt}
+              fill
+              sizes="100vw"
+              className={styles.slideImg}
+              priority={i === 0}
+            />
+          )}
           <div className={styles.scrim} />
           <div className={styles.content}>
             <p className={styles.eyebrow}>{s.eyebrow}</p>

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Header.module.css";
 
 const navItems = [
@@ -9,9 +10,18 @@ const navItems = [
     label: "محصولات",
     href: "/collection",
     children: [
-      { label: "اسپری پمپی", href: "/collection#pump-spray" },
-      { label: "پمپ لوسیون", href: "/collection#lotion-pump" },
-      { label: "درپوش و بطری", href: "/collection#caps-bottles" },
+      {
+        label: "بطری ها",
+        href: "/collection#lotion-pump",
+        children: [
+          {
+            label: "بطری های آرایشی و بهداشتی",
+            href: "/collection#lotion-pump",
+          },
+          { label: " بطری های دارویی", href: "/collection#pump-spray" },
+        ],
+      },
+      { label: " پمپ اسپری ها", href: "/collection#pump-spray" },
     ],
   },
   { label: "درباره ما", href: "/about" },
@@ -30,7 +40,13 @@ export default function Header() {
       onMouseLeave={() => setHover(fixed)}
     >
       <div className={styles.barLayer} data-open={open}>
-        <span className={styles.logo}>تدبیر تجارت</span>
+        <Image
+          src="/images/logo/Logo.webp"
+          alt="Tadbir Tejarat Mana Gostareh"
+          width={160}
+          height={80}
+          className={styles.logo}
+        />
         <button
           className={styles.toggle}
           aria-label="منو"
@@ -46,18 +62,37 @@ export default function Header() {
       <nav className={styles.navLayer} data-open={open}>
         <div className={styles.navInner}>
           <ul className={styles.navList}>
-            {navItems.map(({ label, href, children }) => (
-              <li key={href} className={styles.navItem}>
-                <Link className={styles.navLink} href={href}>
-                  {label}
+            {navItems.map((item) => (
+              <li key={item.href} className={styles.navItem}>
+                <Link className={styles.navLink} href={item.href}>
+                  {item.label}
                 </Link>
-                {children && (
+
+                {item.children && (
                   <ul className={styles.subList}>
-                    {children.map((s) => (
-                      <li key={s.href}>
-                        <Link className={styles.subLink} href={s.href}>
-                          {s.label}
+                    {item.children.map((child) => (
+                      <li key={child.href} className={styles.navItem}>
+                        <Link className={styles.subLink} href={child.href}>
+                          {child.label}
                         </Link>
+
+                        {child.children && (
+                          <ul className={styles.nestedSubList}>
+                            {child.children.map((subChild) => (
+                              <li
+                                key={subChild.href}
+                                className={styles.navItem}
+                              >
+                                <Link
+                                  className={styles.subLink}
+                                  href={subChild.href}
+                                >
+                                  {subChild.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -65,6 +100,7 @@ export default function Header() {
               </li>
             ))}
           </ul>
+
           <button
             className={styles.close}
             aria-label="بستن منو"
