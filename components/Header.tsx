@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Header.module.css";
@@ -31,6 +31,7 @@ const navItems = [
 ];
 
 export default function Header() {
+  const headerRef = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -63,10 +64,25 @@ export default function Header() {
     }
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    function onClickOutside(e: MouseEvent) {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("click", onClickOutside);
+    return () => document.removeEventListener("click", onClickOutside);
+  }, [open]);
+
   const showBackground = open && scrolled;
 
   return (
-    <header className={styles.header} data-scrolled={showBackground}>
+    <header
+      ref={headerRef}
+      className={styles.header}
+      data-scrolled={showBackground}
+    >
       <div className={styles.bar}>
         <div className={styles.brandArea}>
           <div className={styles.logoBadge}>
