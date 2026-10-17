@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import styles from "@/components/PageShell.module.css";
 import ProductGrid from "@/components/ProductGrid";
-
 export const metadata: Metadata = {
   title: "مجموعه محصولات",
   description: "مجموعه کامل عطرهای پمپی برند شما با انواع مکانیزم‌های پاشش."

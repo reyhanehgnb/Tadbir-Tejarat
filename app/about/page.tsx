@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import styles from "@/components/PageShell.module.css";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export const metadata: Metadata = {
   title: "درباره ما | تدبیر تجارت گستر مانا",
   description:
@@ -268,7 +269,7 @@ export default function AboutPage() {
               در ارتباط باشید.
             </p>
 
-            <a href="/contact" className={styles.aboutCtaButton}>
+            <a href={`${basePath}/contact`} className={styles.aboutCtaButton}>
               ارتباط با ما
               <span>↙</span>
             </a>
