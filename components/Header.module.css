@@ -145,7 +145,7 @@
 }
 
 .header[data-scrolled="true"] .navLink {
-  color: var(--color-gold-soft);
+  color:#fdc394;
 }
 
 .subList,

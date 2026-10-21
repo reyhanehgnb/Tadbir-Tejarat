@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import AboutGallery from "./AboutGallery";
@@ -16,21 +17,21 @@ const stats = [
 
 const collections = [
   {
-    src: `${basePath}/images/products/product-6.webp`,
+    src: `${basePath}/images/products/pump-1.png`,
     tone: "white",
     code: "WHITE-01",
     tag: "پرفروش‌ترین پمپ اسپری",
     text: "پمپ اسپری سفید با پاشش یکنواخت و مه ریز؛ انتخاب اول تولیدکنندگان عطر و محصولات آرایشی.",
   },
   {
-    src: `${basePath}/images/products/product-7.webp`,
+    src: `${basePath}/images/products/pump-3.png`,
     tone: "ink",
     code: "NOIR-02",
     tag: "محبوب مشتریان",
     text: "پمپ اسپری مشکی مات با دوام بالا؛ پرسفارش‌ترین مدل برای محصولات بهداشتی و دارویی.",
   },
   {
-    src: `${basePath}/images/products/product-8.webp`,
+    src: `${basePath}/images/products/pump-2.png`,
     tone: "crimson",
     code: "RUBY-03",
     tag: "جدید در مجموعه",
@@ -78,7 +79,7 @@ const footerCols = [
   },
 ];
 
-function Icon({ children, w = 1.6 }: { children: React.ReactNode; w?: number }) {
+function Icon({ children, w = 1.6 }: { children: ReactNode; w?: number }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -150,8 +151,8 @@ export function StoryStatement() {
     <Reveal>
       <section className={styles.story}>
         <p className={styles.storyText}>
-          مجموعه‌ای از پمپ‌ها و اسپری‌ها برای کاربردهای آرایشی، بهداشتی و صنعتی،
-          با تمرکز بر کیفیت و عملکرد قابل اعتماد.
+          مجموعه‌ای از پمپ‌ها و اسپری‌ها برای کاربردهای آرایشی، بهداشتی و
+          صنعتی، با تمرکز بر کیفیت و عملکرد قابل اعتماد.
         </p>
         <div className={styles.stats}>
           <StatItems />
@@ -180,34 +181,47 @@ export function CollectionsShowcase() {
             <p className={styles.eyebrow}>محصولات</p>
             <h2 className={styles.sectionTitle}>برگزیده‌های تدبیر</h2>
           </div>
-          <p className={styles.sectionLead}>پر فروش های این هفته تدبیر تجارت</p>
+          <p className={styles.sectionLead}>پرفروش‌های این هفته تدبیر تجارت</p>
         </div>
 
-        <div className={styles.collZigzag}>
+        <div className={styles.showcase}>
           {collections.map((item, i) => (
-            <Reveal key={item.code} distance="small" delay={i * 90}>
+            <Reveal key={item.code} distance="small" delay={i * 110}>
               <article
-                className={styles.collRow}
+                className={styles.showCard}
                 data-tone={item.tone}
-                data-flip={i % 2 ? "true" : undefined}
+                data-featured={i === 1 ? "true" : undefined}
               >
-                <div className={styles.collRowImg}>
-                  <div className={styles.collRowImgWrap}>
+                <div className={styles.showMedia}>
+                  <div className={styles.showImgWrap}>
                     <Image
                       src={item.src}
                       alt={item.tag}
                       fill
-                      sizes="(max-width: 780px) 90vw, 45vw"
-                      style={{ objectFit: "cover" }}
+                      sizes="(max-width: 860px) 90vw, 30vw"
+                      style={{ objectFit: "contain" }}
                     />
                   </div>
+                  <span className={styles.showCode}>{item.code}</span>
                 </div>
-                <div className={styles.collRowBody}>
-                  <span className={styles.collRowCode}>{item.code}</span>
-                  <h3 className={styles.collRowTag}>{item.tag}</h3>
-                  <p className={styles.collRowText}>{item.text}</p>
-                  <Link className={styles.collRowLink} href="/collection">
-                    مشاهده →
+                <div className={styles.showBody}>
+                  <h3 className={styles.showTag}>{item.tag}</h3>
+                  <p className={styles.showText}>{item.text}</p>
+                  <Link className={styles.showLink} href="/collection">
+                    <span>مشاهده</span>
+                    <svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
                   </Link>
                 </div>
               </article>
@@ -340,7 +354,7 @@ export function Footer() {
           <a className={styles.footerContactItem} href="mailto:Tadbirtgm@gmail.com">
             Tadbirtgm@gmail.com
           </a>
-          <a className={styles.footerContactHours}>شنبه تا پنج‌شنبه، ۸:۰۰ تا ۱۷:۰۰</a>
+          <a className={styles.footerContactItem}>شنبه تا پنج‌شنبه، ۸:۰۰ تا ۱۷:۰۰</a>
         </div>
       </div>
 

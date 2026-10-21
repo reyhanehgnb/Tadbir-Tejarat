@@ -5,7 +5,7 @@ import {
   CollectionsShowcase,
   QuoteBand,
   AboutTeaser,
-  Footer
+  Footer, 
 } from "@/components/HomeSections";
 
 export default function HomePage() {
@@ -17,7 +17,7 @@ export default function HomePage() {
       <CollectionsShowcase />
       <QuoteBand />
       <AboutTeaser />
-      <Footer/>
+      <Footer />
     </main>
   );
 }

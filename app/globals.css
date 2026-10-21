@@ -1,3 +1,4 @@
+
 :root {
   --color-white: #fff;
   --color-cream: #f7f2e9;
@@ -19,7 +20,7 @@
   --color-steel: #6b6258;
   --color-steel-light: #b7b2ac;
   --color-line: rgba(25, 20, 15, 0.12);
-  --font-fa: "Vazirmatn", sans-serif;
+ --font-fa: "Vazirmatn", sans-serif;
   --header-bar-height: 74px;
 }
 
