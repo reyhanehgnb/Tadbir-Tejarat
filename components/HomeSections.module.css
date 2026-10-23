@@ -148,6 +148,7 @@
   gap: 1.25rem;
   width: calc(100% - 1rem);
   margin: 1.75rem auto 0;
+  font-family: sans-serif;
 }
 .statItem {
   position: relative;
@@ -310,7 +311,7 @@
 
 .showMedia {
   position: relative;
-  aspect-ratio: 4 / 4.5;
+  aspect-ratio: 4 / 3.6;
   overflow: hidden;
   background:
     radial-gradient(
@@ -344,7 +345,7 @@
 .showImgWrap {
   position: absolute;
   inset: 0;
-  padding: clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(.5rem, 1vw, 1rem);
 }
 .showImgWrap img {
   filter: drop-shadow(0 16px 18px rgba(25, 20, 15, 0.18));

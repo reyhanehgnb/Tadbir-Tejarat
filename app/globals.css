@@ -39,11 +39,17 @@ html {
 body {
   background: var(--color-cream);
   color: var(--color-ink);
-  font-family: var(--font-fa);
+  font-family: var(--font-fa), sans-serif;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
 a {
   color: inherit;
   text-decoration: none;

@@ -19,10 +19,10 @@ export const metadata: Metadata = {
     "برند شما تولیدکننده پمپ‌های اسپری با کیفیت در رنگ‌های طلایی، مشکی و زرشکی برای صنایع آرایشی و بهداشتی.",
   keywords: ["پمپ اسپری", "تولید پمپ", "بسته‌بندی صنعتی", "پمپ لوسیون"],
   openGraph: {
-    title: "برند شما | تولیدکننده پمپ اسپری",
+    title: "تدبیر تجارت | تولیدکننده پمپ اسپری",
     description: "پمپ‌های اسپری با کیفیت، در رنگ‌های طلایی، مشکی و زرشکی.",
     url: "https://www.yourbrand.com",
-    siteName: "برند شما",
+    siteName: "تدبیر تجارت",
     images: ["/images/products/product-1.webp"],
     locale: "fa_IR",
     type: "website"

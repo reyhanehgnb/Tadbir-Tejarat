@@ -10,20 +10,53 @@ const navItems = [
   { label: "خانه", href: "/" },
   {
     label: "محصولات",
-    href: "/collection",
+    href: "#",
     children: [
       {
         label: "بطری ها",
-        href: "/collection#lotion-pump",
+        href: "#",
         children: [
           {
-            label: "بطری های آرایشی و بهداشتی",
-            href: "/collection#lotion-pump",
+            label: "بطری‌های اسپری و عطری",
+            href: "/collection",
           },
-          { label: " بطری های دارویی", href: "/collection#pump-spray" },
+          {
+            label: "بطری‌های گرد و استوانه‌ای",
+            href: "21",
+          },
+           {
+            label: "بطری‌های شوینده و صنعتی",
+            href: "31",
+          },
+          {
+            label: "بطری‌های دارویی و تخصصی",
+            href: "41",
+          },
+          {
+            label: "بطری‌های چهارگوش و خاص",
+            href: "51",
+          },
+          { label: "بطری‌های آرایشی و بهداشتی", href: "61" },
         ],
       },
-      { label: " پمپ اسپری ها", href: "/collection#pump-spray" },
+      {
+        label: "پمپ اسپری ها",
+        href: "",
+        children: [
+          { label: " پمپ‌های فشاری ", href: "1" },
+          {
+            label: "پمپ‌های دیسپنسر",
+            href: "2",
+          },
+          {
+            label: "اسپری‌های تخصصی",
+            href: "3",
+          },
+          { label: "پمپ و اسپری فوم‌ساز", href: "4" },
+          { label: "پمپ‌های ایرلس و تخصصی", href: "5" },
+          { label: "پمپ اسپری ظریف و عطری", href: "6" },
+        ],
+      },
     ],
   },
   { label: "درباره ما", href: "/about" },
@@ -34,7 +67,6 @@ export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [openItem, setOpenItem] = useState<string | null>(null);
   const [openChild, setOpenChild] = useState<string | null>(null);
 
@@ -48,16 +80,6 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 780px)");
-    function update() {
-      setIsMobile(mq.matches);
-    }
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
-  useEffect(() => {
     if (!open) {
       setOpenItem(null);
       setOpenChild(null);
@@ -65,15 +87,17 @@ export default function Header() {
   }, [open]);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open && !openItem) return;
     function onClickOutside(e: MouseEvent) {
       if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
         setOpen(false);
+        setOpenItem(null);
+        setOpenChild(null);
       }
     }
     document.addEventListener("click", onClickOutside);
     return () => document.removeEventListener("click", onClickOutside);
-  }, [open]);
+  }, [open, openItem]);
 
   const showBackground = open && scrolled;
 
@@ -102,8 +126,12 @@ export default function Header() {
                   <Link
                     className={styles.navLink}
                     href={item.href}
+                    aria-haspopup={item.children ? "true" : undefined}
+                    aria-expanded={
+                      item.children ? openItem === item.href : undefined
+                    }
                     onClick={(e) => {
-                      if (isMobile && item.children) {
+                      if (item.children) {
                         e.preventDefault();
                         setOpenItem((prev) =>
                           prev === item.href ? null : item.href,
@@ -125,8 +153,14 @@ export default function Header() {
                           <Link
                             className={styles.subLink}
                             href={child.href}
+                            aria-haspopup={child.children ? "true" : undefined}
+                            aria-expanded={
+                              child.children
+                                ? openChild === child.href
+                                : undefined
+                            }
                             onClick={(e) => {
-                              if (isMobile && child.children) {
+                              if (child.children) {
                                 e.preventDefault();
                                 setOpenChild((prev) =>
                                   prev === child.href ? null : child.href,

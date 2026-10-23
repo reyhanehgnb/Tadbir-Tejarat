@@ -199,7 +199,7 @@ export function CollectionsShowcase() {
                       alt={item.tag}
                       fill
                       sizes="(max-width: 860px) 90vw, 30vw"
-                      style={{ objectFit: "contain" }}
+                      style={{ objectFit: "contain"}}
                     />
                   </div>
                   <span className={styles.showCode}>{item.code}</span>
