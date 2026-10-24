@@ -47,10 +47,10 @@ export const categories: Category[] = [
           "قابل انتخاب در مدل‌ها و ابعاد مختلف",
         ],
         subsets: [
-          { src: img("product-1"), label: "نمای کامل" },
-          { src: img("product-6"), label: "نمای نزدیک پمپ" },
-          { src: img("product-7"), label: "درب و نازل" },
-          { src: img("product-8"), label: "جزئیات طراحی" },
+          { src: img("lotion-pump-1"), label: "نمای کامل" },
+          { src: img("lotion-pump-8"), label: "نمای نزدیک پمپ" },
+          { src: img("lotion-pump-3"), label: "درب و نازل" },
+          { src: img("lotion-pump-5"), label: "جزئیات طراحی" },
         ],
       },
       {

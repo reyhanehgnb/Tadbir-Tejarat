@@ -126,8 +126,8 @@ export default function ProductGrid({
                     src={activeImage.src}
                     alt={activeImage.label}
                     fill
-                    sizes="(max-width: 600px) 90vw, 420px"
-                    style={{ objectFit: "contain" }}
+                    sizes="(max-width: 550px) 88vw, 400px"
+                    style={{ objectFit: "fill" }}
                   />
                 </div>
               </div>
@@ -152,7 +152,7 @@ export default function ProductGrid({
                         alt={subset.label}
                         fill
                         sizes="64px"
-                        style={{ objectFit: "contain" }}
+                        style={{ objectFit: "fill" }}
                       />
                     </button>
                   ))}
