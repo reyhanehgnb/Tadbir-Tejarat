@@ -9,7 +9,7 @@ import styles from "./HomeSections.module.css";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const stats = [
-  { value: "+۵", label: "سال تجربه تولید" },
+  { value: "۵+", label: "سال تجربه تولید" },
   { value: "۱۰۰+", label: "مدل پمپ و اسپری" },
   { value: "۱۸–۸۹mm", label: "محدوده استاندارد گلویی" },
   { value: "۷۲ساعت", label: "زمان ارسال نمونه" },

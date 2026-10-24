@@ -16,45 +16,42 @@ const navItems = [
         label: "بطری ها",
         href: "#",
         children: [
-          {
-            label: "بطری‌های اسپری و عطری",
-            href: "/collection",
-          },
+          { label: "بطری‌های اسپری و عطری", href: "/collection/bottle-spray" },
           {
             label: "بطری‌های گرد و استوانه‌ای",
-            href: "21",
+            href: "/collection/bottle-round",
           },
-           {
+          {
             label: "بطری‌های شوینده و صنعتی",
-            href: "31",
+            href: "/collection/bottle-detergent",
+          },
+          {
+            label: "بطری‌های آرایشی و بهداشتی",
+            href: "/collection/bottle-cosmetic",
           },
           {
             label: "بطری‌های دارویی و تخصصی",
-            href: "41",
+            href: "/collection/bottle-pharma",
           },
           {
             label: "بطری‌های چهارگوش و خاص",
-            href: "51",
+            href: "/collection/bottle-square",
           },
-          { label: "بطری‌های آرایشی و بهداشتی", href: "61" },
         ],
       },
       {
         label: "پمپ اسپری ها",
-        href: "",
+        href: "#",
         children: [
-          { label: " پمپ‌های فشاری ", href: "1" },
+          { label: "پمپ‌های فشاری", href: "/collection/pump-push" },
+          { label: "پمپ‌های دیسپنسر", href: "/collection/pump-dispenser" },
+          { label: "اسپری‌های تخصصی", href: "/collection/spray-specialty" },
+          { label: "پمپ و اسپری فوم‌ساز", href: "/collection/pump-foam" },
+          { label: "پمپ‌های ایرلس و تخصصی", href: "/collection/pump-airless" },
           {
-            label: "پمپ‌های دیسپنسر",
-            href: "2",
+            label: "پمپ اسپری ظریف و عطری",
+            href: "/collection/pump-fine-mist",
           },
-          {
-            label: "اسپری‌های تخصصی",
-            href: "3",
-          },
-          { label: "پمپ و اسپری فوم‌ساز", href: "4" },
-          { label: "پمپ‌های ایرلس و تخصصی", href: "5" },
-          { label: "پمپ اسپری ظریف و عطری", href: "6" },
         ],
       },
     ],
@@ -62,7 +59,6 @@ const navItems = [
   { label: "درباره ما", href: "/about" },
   { label: "تماس با ما", href: "/contact" },
 ];
-
 export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);

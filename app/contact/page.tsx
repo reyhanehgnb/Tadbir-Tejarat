@@ -116,14 +116,11 @@ export default function ContactPage() {
       <main className={styles.contactPage}>
         <section
           className={styles.hero}
-          style={{ backgroundImage: `url(${basePath}/images/backgrounds/bg-1.webp)` }}
+          style={{ backgroundImage: `url(${basePath}/images/backgrounds/bg-2.webp)` }}
         >
           <div className={styles.heroInner}>
-            <p className={styles.eyebrow}>تماس با ما</p>
-            <h1 className={styles.heroTitle}>گفت‌وگو را با ما شروع کنید</h1>
-            <p className={styles.heroText}>
-              برای سفارش‌های سازمانی، همکاری تجاری یا هر پرسشی، تیم ما در کنار شماست.
-            </p>
+            <p className={styles.topeyebrow}>تماس با ما</p>
+            <h1 className={styles.contactheroTitle}>گفت‌وگو را با ما شروع کنید </h1>
           </div>
         </section>
 

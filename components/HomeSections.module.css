@@ -148,7 +148,6 @@
   gap: 1.25rem;
   width: calc(100% - 1rem);
   margin: 1.75rem auto 0;
-  font-family: sans-serif;
 }
 .statItem {
   position: relative;
@@ -204,8 +203,9 @@
 }
 .statValue {
   display: block;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: var(--color-crimson);
-  font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+  font-size: clamp(1.2rem, 2.7vw, 1.6rem);
   font-weight: 800;
   line-height: 1.25;
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -345,7 +345,7 @@
 .showImgWrap {
   position: absolute;
   inset: 0;
-  padding: clamp(.5rem, 1vw, 1rem);
+  padding: clamp(0.5rem, 1vw, 1rem);
 }
 .showImgWrap img {
   filter: drop-shadow(0 16px 18px rgba(25, 20, 15, 0.18));
@@ -554,7 +554,7 @@
 .footerLogo {
   font-size: 1.25rem;
   font-weight: 700;
-  color:#fdc394;
+  color: #fdc394;
 }
 .footerTagline {
   color: var(--color-steel-light);
