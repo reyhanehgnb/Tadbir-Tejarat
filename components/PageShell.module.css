@@ -1284,8 +1284,6 @@
   color: #795b36;
 }
 
-/* Product details popup */
-
 .modalBackdrop {
   position: fixed;
   z-index: 1000;
@@ -1440,6 +1438,34 @@
   color: var(--collection-ink, #241a18);
   font-size: 0.88rem;
   line-height: 1.9;
+}
+.subNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+.subLink {
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+.subLink:hover {
+  background: var(--color-crimson);
+  border-color: var(--color-crimson);
+  color: var(--color-cream);
+}
+.backLink {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--color-crimson);
+  font-weight: 700;
 }
 
 @keyframes collectionFadeIn {
