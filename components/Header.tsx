@@ -43,11 +43,10 @@ const navItems = [
         label: "پمپ اسپری ها",
         href: "#",
         children: [
+          { label: "قطره چکان", href: "/collection/pump-airless" },
           { label: "پمپ‌های فشاری", href: "/collection/pump-push" },
           { label: "پمپ‌های دیسپنسر", href: "/collection/pump-dispenser" },
           { label: "اسپری‌های تخصصی", href: "/collection/spray-specialty" },
-          { label: "پمپ و اسپری فوم‌ساز", href: "/collection/pump-foam" },
-          { label: "پمپ‌های ایرلس و تخصصی", href: "/collection/pump-airless" },
           {
             label: "پمپ اسپری ظریف و عطری",
             href: "/collection/pump-fine-mist",

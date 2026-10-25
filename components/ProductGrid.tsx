@@ -80,7 +80,7 @@ export default function ProductGrid({
                   fill
                   priority={index < 3}
                   sizes="(max-width: 520px) 45vw, (max-width: 900px) 45vw, 28vw"
-                  style={{ objectFit: "contain" }}
+                  style={{ objectFit: "fill" }}
                 />
               </div>
             </div>
