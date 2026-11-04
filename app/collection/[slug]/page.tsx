@@ -34,57 +34,15 @@ export default async function CategoryPage({ params }: Props) {
       <Header />
 
       <main className={styles.collectionPage}>
-        <section className={styles.collectionHero}>
-          <div className={styles.heroInner}>
-            <span className={styles.heroIndex}>
-              TTGM / {category.slug.toUpperCase()}
-            </span>
-
-            <p className={styles.eyebrowLight}>مجموعه محصولات تدبیر تجارت</p>
-
-            <h1 className={styles.collectionTitle}>
-              {category.title}
-              <br />
-              <span>{category.tagline}</span>
-            </h1>
-
-            <div className={styles.heroBottom}>
-              <p className={styles.collectionSub}>{category.description}</p>
-
-              <a href="#product-catalog" className={styles.heroLink}>
-                مشاهده محصولات
-                <span aria-hidden="true">↙</span>
-              </a>
-            </div>
-
-            <span className={styles.heroWatermark} aria-hidden="true">
-              TTGM
-            </span>
-          </div>
-        </section>
+        <div className={styles.pageBar}>
+          <h1 className={styles.pageTitle}>{category.title}</h1>
+          <p className={styles.pageNote}>{category.tagline}</p>
+          <span className={styles.pageCount}>
+            {String(category.products.length).padStart(2, "0")} MODELS
+          </span>
+        </div>
 
         <section id="product-catalog" className={styles.catalogSection}>
-          <div className={styles.catalogHeading}>
-            <div>
-              <p className={styles.eyebrow}>01 — کاتالوگ محصولات</p>
-              <h2 className={styles.catalogTitle}>
-                مکانیزم مناسب خود را پیدا کنید
-              </h2>
-            </div>
-
-            <p className={styles.catalogDescription}>
-              برای مشاهده تصاویر بیشتر و آشنایی با ویژگی‌های هر محصول، روی
-              تصویر یا کارت آن کلیک کنید.
-            </p>
-          </div>
-
-          <div className={styles.catalogMeta}>
-            <span>PRODUCT COLLECTION</span>
-            <span>
-              {String(category.products.length).padStart(2, "0")} MODELS
-            </span>
-          </div>
-
           {category.products.length > 0 ? (
             <ProductGrid products={category.products} />
           ) : (

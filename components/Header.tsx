@@ -13,44 +13,45 @@ const navItems = [
     href: "#",
     children: [
       {
-        label: "بطری ها",
+        label: "پمپ",
         href: "#",
         children: [
-          { label: "بطری‌های اسپری و عطری", href: "/collection/bottle-spray" },
-          {
-            label: "بطری‌های گرد و استوانه‌ای",
-            href: "/collection/bottle-round",
-          },
-          {
-            label: "بطری‌های شوینده و صنعتی",
-            href: "/collection/bottle-detergent",
-          },
-          {
-            label: "بطری‌های آرایشی و بهداشتی",
-            href: "/collection/bottle-cosmetic",
-          },
-          {
-            label: "بطری‌های دارویی و تخصصی",
-            href: "/collection/bottle-pharma",
-          },
-          {
-            label: "بطری‌های چهارگوش و خاص",
-            href: "/collection/bottle-square",
-          },
+          { label: "پمپ کرم", href: "/collection/pump-cream" },
+          { label: "پمپ تریگر", href: "/collection/pump-trigger" },
+          { label: "پمپ اسپری", href: "/collection/pump-spray" },
+          { label: "پمپ نازل دار", href: "/collection/pump-nozzle" },
+          { label: "پمپ فوم‌ساز", href: "/collection/pump-foam" },
+          { label: "پمپ لیدوکائین", href: "/collection/pump-lidocaine" },
+          { label: "پمپ‌ غلیظ پاش", href: "/collection/pump-thick" },
+          { label: "پمپ عمود پاش", href: "/collection/pump-vertical" },
+          { label: "پمپ اسپری بینی", href: "/collection/pump-nasal" },
+          { label: "پمپ اسپری تحت فشار", href: "/collection/pump-pressure" },
         ],
       },
       {
-        label: "پمپ اسپری ها",
+        label: "درب",
         href: "#",
         children: [
-          { label: "قطره چکان", href: "/collection/pump-airless" },
-          { label: "پمپ‌های فشاری", href: "/collection/pump-push" },
-          { label: "پمپ‌های دیسپنسر", href: "/collection/pump-dispenser" },
-          { label: "اسپری‌های تخصصی", href: "/collection/spray-specialty" },
-          {
-            label: "پمپ اسپری ظریف و عطری",
-            href: "/collection/pump-fine-mist",
-          },
+          { label: "قطره چکان", href: "/collection/cap-dropper" },
+          { label: "درب پلاستیکی", href: "/collection/cap-plastic" },
+          { label: "درب آلومینیومی", href: "/collection/cap-aluminum" },
+        ],
+      },
+      {
+        label: "بطری",
+        href: "#",
+        children: [
+          { label: "بطری‌ ایرلس", href: "/collection/bottle-airless" },
+          { label: "بطری پلیمری", href: "/collection/bottle-polymer" },
+          { label: "بطری‌ شیشه ای", href: "/collection/bottle-glass" },
+        ],
+      },
+      {
+        label: "سایر ملزومات",
+        href: "#",
+        children: [
+          { label: "مینی بگ آرایشی", href: "/collection/mini-bag-cosmetic" },
+          { label: "مینی بگ مسافرتی", href: "/collection/mini-bag-travel" },
         ],
       },
     ],
@@ -104,32 +105,34 @@ export default function Header() {
     >
       <div className={styles.bar}>
         <div className={styles.brandArea}>
-          <div className={styles.logoBadge}>
-            <Image
-              src={`${basePath}/images/logo/Logo.webp`}
-              alt="Tadbir Tejarat Mana Gostareh"
-              width={160}
-              height={80}
-              className={styles.logo}
-            />
-          </div>
+          <button
+            className={styles.toggle}
+            aria-label="منو"
+            aria-expanded={open}
+            data-open={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            <i className={styles.toggleLine} />
+            <i className={styles.toggleLine} />
+            <i className={styles.toggleLine} />
+          </button>
 
           <nav className={styles.nav} data-open={open}>
             <ul className={styles.navList}>
               {navItems.map((item) => (
-                <li key={item.href} className={styles.navItem}>
+                <li key={item.label} className={styles.navItem}>
                   <Link
                     className={styles.navLink}
                     href={item.href}
                     aria-haspopup={item.children ? "true" : undefined}
                     aria-expanded={
-                      item.children ? openItem === item.href : undefined
+                      item.children ? openItem === item.label : undefined
                     }
                     onClick={(e) => {
                       if (item.children) {
                         e.preventDefault();
                         setOpenItem((prev) =>
-                          prev === item.href ? null : item.href,
+                          prev === item.label ? null : item.label,
                         );
                         setOpenChild(null);
                       }
@@ -141,24 +144,24 @@ export default function Header() {
                   {item.children && (
                     <ul
                       className={styles.subList}
-                      data-open={openItem === item.href}
+                      data-open={openItem === item.label}
                     >
                       {item.children.map((child) => (
-                        <li key={child.href} className={styles.navItem}>
+                        <li key={child.label} className={styles.navItem}>
                           <Link
                             className={styles.subLink}
                             href={child.href}
                             aria-haspopup={child.children ? "true" : undefined}
                             aria-expanded={
                               child.children
-                                ? openChild === child.href
+                                ? openChild === child.label
                                 : undefined
                             }
                             onClick={(e) => {
                               if (child.children) {
                                 e.preventDefault();
                                 setOpenChild((prev) =>
-                                  prev === child.href ? null : child.href,
+                                  prev === child.label ? null : child.label,
                                 );
                               }
                             }}
@@ -169,11 +172,11 @@ export default function Header() {
                           {child.children && (
                             <ul
                               className={styles.nestedSubList}
-                              data-open={openChild === child.href}
+                              data-open={openChild === child.label}
                             >
                               {child.children.map((subChild) => (
                                 <li
-                                  key={subChild.href}
+                                  key={subChild.label}
                                   className={styles.navItem}
                                 >
                                   <Link
@@ -195,18 +198,17 @@ export default function Header() {
             </ul>
           </nav>
         </div>
-
-        <button
-          className={styles.toggle}
-          aria-label="منو"
-          aria-expanded={open}
-          data-open={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <i className={styles.toggleLine} />
-          <i className={styles.toggleLine} />
-          <i className={styles.toggleLine} />
-        </button>
+        <div className={styles.logoBadge}>
+          <Link href="/" aria-label="صفحه اصلی">
+            <Image
+              src={`${basePath}/images/logo/Logo.webp`}
+              alt="Tadbir Tejarat Mana Gostareh"
+              width={160}
+              height={80}
+              className={styles.logo}
+            />
+          </Link>
+        </div>
       </div>
     </header>
   );

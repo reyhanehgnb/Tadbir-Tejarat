@@ -11,7 +11,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const stats = [
   { value: "۵+", label: "سال تجربه تولید" },
   { value: "۱۰۰+", label: "مدل پمپ و اسپری" },
-  { value: "۱۸–۸۹mm", label: "محدوده استاندارد گلویی" },
+  { value: "۱۸– ۸۹mm", label: "محدوده استاندارد گلویی" },
   { value: "۷۲ساعت", label: "زمان ارسال نمونه" },
 ];
 
@@ -144,7 +144,7 @@ function StatItems() {
       ))}
     </>
   );
-}
+} 
 
 export function StoryStatement() {
   return (
