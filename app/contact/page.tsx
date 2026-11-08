@@ -63,7 +63,7 @@ function OfficeMap({ lat, lon, title }: { lat: number; lon: number; title: strin
       });
       L.marker([lat, lon], { icon, title }).addTo(map);
 
-      map.flyTo([lat, lon], 17, { duration: 2.2 }); 
+      map.flyTo([lat, lon], 17, { duration: 2.2 });
     })();
 
     return () => {
@@ -102,6 +102,21 @@ export default function ContactPage() {
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setF({ ...f, [k]: e.target.value });
 
+  const field = (
+    k: keyof typeof f,
+    label: string,
+    props: React.InputHTMLAttributes<HTMLInputElement> = {},
+  ) => (
+    <input
+      className={styles.formInput}
+      placeholder={label}
+      aria-label={label}
+      value={f[k]}
+      onChange={set(k)}
+      {...props}
+    />
+  );
+
   function send(e: React.FormEvent) {
     e.preventDefault();
     const body = `نام: ${f.name}\nایمیل: ${f.email}\n\n${f.message}`;
@@ -129,7 +144,7 @@ export default function ContactPage() {
             <div key={p.eyebrow} className={styles.infoPanel}>
               <p className={styles.eyebrow}>{p.eyebrow}</p>
               <h2 className={styles.panelTitle}>{p.title}</h2>
-              <p className={styles.heroText}>{p.text}</p>
+              <p className={styles.boxText}>{p.text}</p>
               <dl className={styles.infoList}>
                 {INFO_ROWS.map(([label, value]) => (
                   <div key={label} className={styles.infoRow}>
@@ -147,37 +162,20 @@ export default function ContactPage() {
           <div className={styles.formInner}>
             <p className={styles.eyebrow}>پیام مستقیم</p>
             <h2 className={styles.panelTitle}>برای ما بنویسید</h2>
-            <p className={styles.heroText}>
+            <p className={styles.boxText}>
               تیم ما آماده برقراری ارتباط و پاسخگویی در کوتاه ترین زمان ممکن با شما است.
             </p>
 
             <form className={styles.contactForm} onSubmit={send}>
               <div className={styles.formRow}>
-                <input
-                  className={styles.formInput}
-                  placeholder="نام شما"
-                  value={f.name}
-                  onChange={set("name")}
-                  required
-                />
-                <input
-                  className={styles.formInput}
-                  type="email"
-                  placeholder="ایمیل شما"
-                  value={f.email}
-                  onChange={set("email")}
-                  required
-                />
+                {field("name", "نام شما", { required: true })}
+                {field("email", "ایمیل شما", { type: "email", required: true })}
               </div>
-              <input
-                className={styles.formInput}
-                placeholder="موضوع"
-                value={f.subject}
-                onChange={set("subject")}
-              />
+              {field("subject", "موضوع")}
               <textarea
                 className={styles.formTextarea}
                 placeholder="متن پیام شما"
+                aria-label="متن پیام شما"
                 value={f.message}
                 onChange={set("message")}
                 rows={5}

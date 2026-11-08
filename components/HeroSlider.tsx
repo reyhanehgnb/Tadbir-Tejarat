@@ -47,6 +47,12 @@ const slides = [
 
 const AUTOPLAY_DELAY = 5500;
 const N = slides.length;
+const wrap = (i: number) => (i + N) % N;
+
+const arrows = [
+  { cls: styles.arrowStart, label: "محصول قبلی", char: "‹", step: -1 },
+  { cls: styles.arrowEnd, label: "محصول بعدی", char: "›", step: 1 },
+];
 
 export default function HeroSlider() {
   const [active, setActive] = useState(0);
@@ -54,15 +60,10 @@ export default function HeroSlider() {
   const [seen, setSeen] = useState<number[]>([0]);
 
   useEffect(() => {
-    setSeen((s) => [...new Set([...s, active, (active + 1) % N])]);
-  }, [active]);
-
-  useEffect(() => {
-    const t = setTimeout(() => setActive((a) => (a + 1) % N), AUTOPLAY_DELAY);
+    setSeen((s) => [...new Set([...s, active, wrap(active + 1)])]);
+    const t = setTimeout(() => setActive(wrap(active + 1)), AUTOPLAY_DELAY);
     return () => clearTimeout(t);
   }, [active]);
-
-  const goTo = (i: number) => setActive((i + N) % N);
 
   return (
     <section className={styles.hero} aria-label="محصولات ویژه">
@@ -90,20 +91,16 @@ export default function HeroSlider() {
         </div>
       ))}
 
-      <button
-        className={`${styles.arrow} ${styles.arrowStart}`}
-        aria-label="محصول قبلی"
-        onClick={() => goTo(active - 1)}
-      >
-        ‹
-      </button>
-      <button
-        className={`${styles.arrow} ${styles.arrowEnd}`}
-        aria-label="محصول بعدی"
-        onClick={() => goTo(active + 1)}
-      >
-        ›
-      </button>
+      {arrows.map((a) => (
+        <button
+          key={a.label}
+          className={`${styles.arrow} ${a.cls}`}
+          aria-label={a.label}
+          onClick={() => setActive(wrap(active + a.step))}
+        >
+          {a.char}
+        </button>
+      ))}
 
       <div className={styles.dots}>
         {slides.map((s, i) => (
@@ -112,7 +109,7 @@ export default function HeroSlider() {
             className={styles.dot}
             data-active={i === active}
             aria-label={`رفتن به اسلاید ${i + 1}`}
-            onClick={() => goTo(i)}
+            onClick={() => setActive(i)}
           />
         ))}
       </div>

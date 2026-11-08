@@ -10,24 +10,20 @@ export const dynamicParams = false;
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return categories.map((c) => ({ slug: c.slug }));
-}
+export const generateStaticParams = () =>
+  categories.map((c) => ({ slug: c.slug }));
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const category = getCategory(slug);
-  if (!category) return {};
-  return {
-    title: `${category.title} | تدبیر تجارت`,
-    description: category.description,
-  };
+  const category = getCategory((await params).slug);
+  return category
+    ? { title: `${category.title} | تدبیر تجارت`, description: category.description }
+    : {};
 }
 
 export default async function CategoryPage({ params }: Props) {
-  const { slug } = await params;
-  const category = getCategory(slug);
+  const category = getCategory((await params).slug);
   if (!category) notFound();
+  const { title, tagline, products } = category;
 
   return (
     <>
@@ -35,16 +31,16 @@ export default async function CategoryPage({ params }: Props) {
 
       <main className={styles.collectionPage}>
         <div className={styles.pageBar}>
-          <h1 className={styles.pageTitle}>{category.title}</h1>
-          <p className={styles.pageNote}>{category.tagline}</p>
+          <h1 className={styles.pageTitle}>{title}</h1>
+          <p className={styles.pageNote}>{tagline}</p>
           <span className={styles.pageCount}>
-            {String(category.products.length).padStart(2, "0")} MODELS
+            {String(products.length).padStart(2, "0")} MODELS
           </span>
         </div>
 
         <section id="product-catalog" className={styles.catalogSection}>
-          {category.products.length > 0 ? (
-            <ProductGrid products={category.products} />
+          {products.length > 0 ? (
+            <ProductGrid products={products} />
           ) : (
             <p className={styles.catalogDescription}>
               محصولات این دسته به‌زودی اضافه می‌شود.

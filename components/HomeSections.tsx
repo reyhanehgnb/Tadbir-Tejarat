@@ -94,6 +94,25 @@ function Icon({ children, w = 1.6 }: { children: ReactNode; w?: number }) {
   );
 }
 
+function Arrow({ size, className }: { size: number; className?: string }) {
+  return (
+    <svg
+      className={className}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M19 12H5M12 19l-7-7 7-7" />
+    </svg>
+  );
+}
+
 const socialLinks = [
   {
     name: "اینستاگرام",
@@ -144,7 +163,7 @@ function StatItems() {
       ))}
     </>
   );
-} 
+}
 
 export function StoryStatement() {
   return (
@@ -199,7 +218,7 @@ export function CollectionsShowcase() {
                       alt={item.tag}
                       fill
                       sizes="(max-width: 860px) 90vw, 30vw"
-                      style={{ objectFit: "contain"}}
+                      style={{ objectFit: "contain" }}
                     />
                   </div>
                   <span className={styles.showCode}>{item.code}</span>
@@ -209,19 +228,7 @@ export function CollectionsShowcase() {
                   <p className={styles.showText}>{item.text}</p>
                   <Link className={styles.showLink} href="/collection">
                     <span>مشاهده</span>
-                    <svg
-                      width="17"
-                      height="17"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M19 12H5M12 19l-7-7 7-7" />
-                    </svg>
+                    <Arrow size={17} />
                   </Link>
                 </div>
               </article>
@@ -231,20 +238,7 @@ export function CollectionsShowcase() {
 
         <Link className={styles.outlineButton} href="/collection">
           <span>مشاهده همه محصولات</span>
-          <svg
-            className={styles.arrow}
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M19 12H5M12 19l-7-7 7-7" />
-          </svg>
+          <Arrow size={18} className={styles.arrow} />
         </Link>
       </section>
     </Reveal>

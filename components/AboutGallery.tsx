@@ -6,7 +6,6 @@ import styles from "./AboutGallery.module.css";
 
 export default function AboutGallery({ images }: { images: { src: string; alt: string }[] }) {
   const [index, setIndex] = useState(0);
-  // images allowed to load: current + next one
   const [seen, setSeen] = useState<number[]>([0]);
 
   useEffect(() => {

@@ -14,7 +14,7 @@
   margin: 0 auto clamp(2.5rem, 6vw, 4rem);
 }
 .topeyebrow {
-  color: #000000;
+  color:var(--color-gold);
   font-size:1.5rem;
   font-weight: 600;
 }
@@ -857,14 +857,28 @@
 /* ============================================================
    CONTACT PAGE — hero, two-column info section, form
    ============================================================ */
-
 .hero {
   position: relative;
   background-size: cover;
   background-position: center;
   overflow: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-end;
   padding: calc(var(--header-bar-height) + clamp(2rem, 7vw, 5rem))
-    clamp(1.25rem, 6vw, 4.5rem) clamp(8rem, 13vw, 11rem);
+    clamp(1.25rem, 6vw, 4.5rem) clamp(5rem, 9vw, 8rem);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 60% at 90% 90%,
+    rgba(20, 6, 8, 0.85) 0%,
+    rgba(20, 6, 8, 0.5) 45%,
+    rgba(20, 6, 8, 0) 100%
+  );
 }
 .hero :global(.heroPatternSvg) {
   position: absolute;
@@ -874,6 +888,7 @@
 }
 .heroInner {
   position: relative;
+  z-index: 1;
   max-width: 40rem;
   animation: heroRise 0.7s ease both;
 }
@@ -882,12 +897,42 @@
   font-weight: 700;
   line-height: 1.25;
   margin: 0.6rem 0 1.1rem;
+  color: var(--color-cream);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
 .heroText {
-  color: var(--color-ink);
+  color: var(--color-cream);
   font-size: 1.05rem;
   line-height: 1.9;
   max-width: 34rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+}
+.boxText {
+  color: var(--color-ink);
+}
+
+@media (max-width: 1050px) {
+  .hero {
+    min-height: 40vh;
+    min-height: 40dvh;
+    padding: calc(var(--header-bar-height) + 1rem) 1.25rem 1.75rem;
+  }
+  .hero::before {
+    background: radial-gradient(
+      ellipse 120% 90% at 100% 100%,
+      rgba(20, 6, 8, 0.85) 0%,
+      rgba(20, 6, 8, 0.5) 50%,
+      rgba(20, 6, 8, 0) 100%
+    );
+  }
+  .heroTitle {
+    font-size: clamp(1.35rem, 5.5vw, 1.8rem);
+    margin: 0.3rem 0 0.5rem;
+  }
+  .heroText {
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
 }
 .contactSection {
   color: #6b6156;
@@ -1265,7 +1310,7 @@
 
 .heroLink:hover,
 .footerLink:hover {
-  color: var(--collection-cream);
+  color: var(--color-crimson);
   gap: 1rem;
 }
 

@@ -6,7 +6,10 @@ import Image from "next/image";
 import styles from "./Header.module.css";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const navItems = [
+
+type Item = { label: string; href: string; children?: Item[] };
+
+const navItems: Item[] = [
   { label: "خانه", href: "/" },
   {
     label: "محصولات",
@@ -59,49 +62,94 @@ const navItems = [
   { label: "درباره ما", href: "/about" },
   { label: "تماس با ما", href: "/contact" },
 ];
+
+const linkCls = [styles.navLink, styles.subLink, styles.nestedSubLink];
+const listCls = [styles.subList, styles.nestedSubList];
+
+function Items({
+  items,
+  depth,
+  path,
+  toggle,
+}: {
+  items: Item[];
+  depth: number;
+  path: string[];
+  toggle: (depth: number, label: string) => void;
+}) {
+  return (
+    <>
+      {items.map((item) => {
+        const isOpen = path[depth] === item.label;
+        return (
+          <li key={item.label} className={styles.navItem}>
+            <Link
+              className={linkCls[depth]}
+              href={item.href}
+              aria-haspopup={item.children ? "true" : undefined}
+              aria-expanded={item.children ? isOpen : undefined}
+              onClick={(e) => {
+                if (item.children) {
+                  e.preventDefault();
+                  toggle(depth, item.label);
+                }
+              }}
+            >
+              {item.label}
+            </Link>
+            {item.children && (
+              <ul className={listCls[depth]} data-open={isOpen}>
+                <Items
+                  items={item.children}
+                  depth={depth + 1}
+                  path={path}
+                  toggle={toggle}
+                />
+              </ul>
+            )}
+          </li>
+        );
+      })}
+    </>
+  );
+}
+
 export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [openItem, setOpenItem] = useState<string | null>(null);
-  const [openChild, setOpenChild] = useState<string | null>(null);
+  const [path, setPath] = useState<string[]>([]);
+
+  const closeAll = () => {
+    setOpen(false);
+    setPath([]);
+  };
+  const toggle = (depth: number, label: string) =>
+    setPath((p) =>
+      p[depth] === label ? p.slice(0, depth) : [...p.slice(0, depth), label],
+    );
 
   useEffect(() => {
-    function onScroll() {
-      setScrolled(window.scrollY > 10);
-    }
+    const onScroll = () => setScrolled(window.scrollY > 10);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    if (!open) {
-      setOpenItem(null);
-      setOpenChild(null);
-    }
-  }, [open]);
-
-  useEffect(() => {
-    if (!open && !openItem) return;
-    function onClickOutside(e: MouseEvent) {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
-        setOpen(false);
-        setOpenItem(null);
-        setOpenChild(null);
-      }
-    }
+    if (!open && !path.length) return;
+    const onClickOutside = (e: MouseEvent) => {
+      if (!headerRef.current?.contains(e.target as Node)) closeAll();
+    };
     document.addEventListener("click", onClickOutside);
     return () => document.removeEventListener("click", onClickOutside);
-  }, [open, openItem]);
-
-  const showBackground = open && scrolled;
+  }, [open, path]);
 
   return (
     <header
       ref={headerRef}
       className={styles.header}
-      data-scrolled={showBackground}
+      data-scrolled={open && scrolled}
     >
       <div className={styles.bar}>
         <div className={styles.brandArea}>
@@ -110,7 +158,7 @@ export default function Header() {
             aria-label="منو"
             aria-expanded={open}
             data-open={open}
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => (open ? closeAll() : setOpen(true))}
           >
             <i className={styles.toggleLine} />
             <i className={styles.toggleLine} />
@@ -119,82 +167,7 @@ export default function Header() {
 
           <nav className={styles.nav} data-open={open}>
             <ul className={styles.navList}>
-              {navItems.map((item) => (
-                <li key={item.label} className={styles.navItem}>
-                  <Link
-                    className={styles.navLink}
-                    href={item.href}
-                    aria-haspopup={item.children ? "true" : undefined}
-                    aria-expanded={
-                      item.children ? openItem === item.label : undefined
-                    }
-                    onClick={(e) => {
-                      if (item.children) {
-                        e.preventDefault();
-                        setOpenItem((prev) =>
-                          prev === item.label ? null : item.label,
-                        );
-                        setOpenChild(null);
-                      }
-                    }}
-                  >
-                    {item.label}
-                  </Link>
-
-                  {item.children && (
-                    <ul
-                      className={styles.subList}
-                      data-open={openItem === item.label}
-                    >
-                      {item.children.map((child) => (
-                        <li key={child.label} className={styles.navItem}>
-                          <Link
-                            className={styles.subLink}
-                            href={child.href}
-                            aria-haspopup={child.children ? "true" : undefined}
-                            aria-expanded={
-                              child.children
-                                ? openChild === child.label
-                                : undefined
-                            }
-                            onClick={(e) => {
-                              if (child.children) {
-                                e.preventDefault();
-                                setOpenChild((prev) =>
-                                  prev === child.label ? null : child.label,
-                                );
-                              }
-                            }}
-                          >
-                            {child.label}
-                          </Link>
-
-                          {child.children && (
-                            <ul
-                              className={styles.nestedSubList}
-                              data-open={openChild === child.label}
-                            >
-                              {child.children.map((subChild) => (
-                                <li
-                                  key={subChild.label}
-                                  className={styles.navItem}
-                                >
-                                  <Link
-                                    className={styles.nestedSubLink}
-                                    href={subChild.href}
-                                  >
-                                    {subChild.label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
+              <Items items={navItems} depth={0} path={path} toggle={toggle} />
             </ul>
           </nav>
         </div>

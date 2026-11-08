@@ -6,7 +6,7 @@ export type Product = {
   name: string;
   text: string;
   details: string[];
-  subsets: { src: string; }[];
+  subsets: { src: string }[];
 };
 
 export type Category = {
@@ -19,85 +19,7 @@ export type Category = {
 };
 
 export const categories: Category[] = [
-  {
-    slug: "pump-cream",
-    parent: null,
-    title: "پمپ کرم",
-    tagline: "مناسب برای محصولات غلیظ، با خروجی پهن و کنترل‌شده و طراحی مقاوم",
-    description:
-      "طراحی‌شده برای بسته‌بندی و توزیع کنترل‌شده کرم‌ها و محصولات غلیظ، با عملکرد روان و خروجی دقیق",
-    products: [
-      {
-        src: img("cream-pump-1"),
-        name: "پمپ کرم استاندارد",
-        text: "طراحی ساده و کاربردی، با عملکرد روان و خروجی یکنواخت برای استفاده روزمره",
-        details: [
-          "طراحی استاندارد و خوش‌دست",
-          "خروجی یکنواخت در هر بار فشار",
-          "قابلیت قفل برای جلوگیری از نشت محتویات",
-        ],
-        subsets: [
-          { src: img("cream-detail-1")},
-          { src: img("cream-detail-2")},
-          { src: img("cream-detail-3")},
-          { src: img("cream-detail-4")},
-          { src: img("cream-detail-5")},
-        ],
-      },
-      {
-        src: img("cream-pump-2"),
-        name: "پمپ کرم قفل دار",
-        text: "دارای مکانیزم قفل برای جلوگیری از خروج ناخواسته مواد و حفظ ایمنی محصول هنگام حمل‌ونقل",
-        details: [
-          "مجهز به مکانیزم قفل ایمن",
-          "جلوگیری از خروج ناخواسته مواد",
-          "مناسب برای حمل‌ونقل و نگهداری آسان",
-        ],
-        subsets: [
-          { src: img("cream-detail-6")},
-          { src: img("cream-detail-7")},
-          { src: img("cream-detail-8")},
-          { src: img("cream-detail-9")},
-          { src: img("cream-detail-10")},
-        ],
-      },
-      {
-        src: img("cream-pump-3"),
-        name: "پمپ کرم با خروجی پهن",
-        text: "مناسب برای توزیع آسان کرم‌ها و محصولات غلیظ با خروجی پهن و یکنواخت",
-        details: [
-          "عملکرد روان و بدون فشار اضافی",
-          "خروجی پهن برای تخلیه آسان‌تر کرم",
-          "توزیع یکنواخت و کنترل‌شده مواد غلیظ",
-        ],
-        subsets: [
-          { src: img("cream-detail-9")},
-          { src: img("cream-detail-10")},
-          { src: img("cream-detail-11")},
-          { src: img("cream-detail-12")},
-        ],
-      },
-      {
-        src: img("cream-pump-4"),
-        name: "پمپ با نازل بلند",
-        text: "راهکاری ساده برای توزیع کنترل‌شده مایعات با ویسکوزیته پایین.",
-        details: [
-          "مناسب برای مایعات سازگار با مکانیزم",
-          "طراحی متناسب با بسته‌بندی محصول",
-          "قابل انتخاب بر اساس میزان خروجی موردنیاز",
-        ],
-        subsets: [
-          { src: img("cream-detail-16")},
-          { src: img("cream-detail-17")},
-          { src: img("cream-detail-18")},
-          { src: img("cream-detail-19")},
-          { src: img("cream-detail-20")},
-        ],
-      },
-    ],
-  },
-
-  /* ---------- گروه‌های اصلی ---------- */
+  /* ---------- main group ---------- */
   {
     slug: "pump",
     parent: null,
@@ -130,21 +52,100 @@ export const categories: Category[] = [
     parent: null,
     title: "سایر ملزومات",
     tagline: "مکمل بسته‌بندی شما.",
-    description: "ملزومات جانبی بسته‌بندی و مصرف، از مینی‌بگ‌ها تا وسایل کاربردی.",
+    description:
+      "ملزومات جانبی بسته‌بندی و مصرف، از مینی‌بگ‌ها تا وسایل کاربردی.",
     products: [],
   },
 
-  /* ---------- پمپ ---------- */
+  /* ---------- pump ---------- */
+  {
+    slug: "pump-cream",
+    parent: null,
+    title: "پمپ کرم",
+    tagline: "مناسب برای محصولات غلیظ، با خروجی پهن و کنترل‌شده و طراحی مقاوم",
+    description:
+      "طراحی‌شده برای بسته‌بندی و توزیع کنترل‌شده کرم‌ها و محصولات غلیظ، با عملکرد روان و خروجی دقیق",
+    products: [
+      {
+        src: img("cream-pump-1"),
+        name: "پمپ کرم استاندارد",
+        text: "طراحی ساده و کاربردی، با عملکرد روان و خروجی یکنواخت برای استفاده روزمره",
+        details: [
+          "طراحی استاندارد و خوش‌دست",
+          "خروجی یکنواخت در هر بار فشار",
+          "قابلیت قفل برای جلوگیری از نشت محتویات",
+        ],
+        subsets: [
+          { src: img("cream-detail-1") },
+          { src: img("cream-detail-2") },
+          { src: img("cream-detail-3") },
+          { src: img("cream-detail-4") },
+          { src: img("cream-detail-5") },
+        ],
+      },
+      {
+        src: img("cream-pump-2"),
+        name: "پمپ کرم قفل دار",
+        text: "دارای مکانیزم قفل برای جلوگیری از خروج ناخواسته مواد و حفظ ایمنی محصول هنگام حمل‌ونقل",
+        details: [
+          "مجهز به مکانیزم قفل ایمن",
+          "جلوگیری از خروج ناخواسته مواد",
+          "مناسب برای حمل‌ونقل و نگهداری آسان",
+        ],
+        subsets: [
+          { src: img("cream-detail-6") },
+          { src: img("cream-detail-7") },
+          { src: img("cream-detail-8") },
+          { src: img("cream-detail-9") },
+          { src: img("cream-detail-10") },
+        ],
+      },
+      {
+        src: img("cream-pump-3"),
+        name: "پمپ کرم با خروجی پهن",
+        text: "مناسب برای توزیع آسان کرم‌ها و محصولات غلیظ با خروجی پهن و یکنواخت",
+        details: [
+          "عملکرد روان و بدون فشار اضافی",
+          "خروجی پهن برای تخلیه آسان‌تر کرم",
+          "توزیع یکنواخت و کنترل‌شده مواد غلیظ",
+        ],
+        subsets: [
+          { src: img("cream-detail-11") },
+          { src: img("cream-detail-12") },
+          { src: img("cream-detail-13") },
+          { src: img("cream-detail-14") },
+          { src: img("cream-detail-15") },
+        ],
+      },
+      {
+        src: img("cream-pump-4"),
+        name: "پمپ با نازل بلند",
+        text: "راهکاری ساده برای توزیع کنترل‌شده مایعات با ویسکوزیته پایین.",
+        details: [
+          "مناسب برای مایعات سازگار با مکانیزم",
+          "طراحی متناسب با بسته‌بندی محصول",
+          "قابل انتخاب بر اساس میزان خروجی موردنیاز",
+        ],
+        subsets: [
+          { src: img("cream-detail-16") },
+          { src: img("cream-detail-17") },
+          { src: img("cream-detail-18") },
+          { src: img("cream-detail-19") },
+          { src: img("cream-detail-20") },
+        ],
+      },
+    ],
+  },
   {
     slug: "pump-trigger",
     parent: "pump",
     title: "پمپ تریگر",
-    tagline: "پاشش قوی برای مصارف روزمره.",
+    tagline: "پاشش قوی برای مصارف روزمره",
     description:
       "پمپ‌های تریگر برای شوینده‌ها، پاک‌کننده‌ها و محلول‌هایی که به پاشش مستقیم و کنترل‌شده نیاز دارند.",
     products: [
       {
-        src: img("pump-trigger-1"),
+        src: img("trigger-pump-1"),
         name: "پمپ تریگر استاندارد",
         text: "پاشش قوی و یکنواخت برای شوینده‌ها و پاک‌کننده‌های خانگی",
         details: [
@@ -153,22 +154,62 @@ export const categories: Category[] = [
           "مناسب مایعات شوینده و پاک‌کننده",
         ],
         subsets: [
-          { src: img("pump-trigger-1")},
-          { src: img("pump-trigger-1-detail")},
+          { src: img("trigger-detail-1") },
+          { src: img("trigger-detail-2") },
+          { src: img("trigger-detail-3") },
+          { src: img("trigger-detail-4") },
+          { src: img("trigger-detail-5") },
         ],
       },
       {
-        src: img("pump-trigger-2"),
+        src: img("trigger-pump-2"),
+        name: "پمپ مینی تریگر",
+        text: "طراحی کوچک و جمع‌وجور، با عملکرد اسپری یکنواخت و مناسب بسته‌بندی‌های کم‌حجم",
+        details: [
+          "وزن سبک و ابعاد کوچک",
+          "مکانیزم فشاری نرم و روان",
+          "نازل قابل تنظیم در برخی مدل‌ها",
+        ],
+        subsets: [
+          { src: img("trigger-detail-6") },
+          { src: img("trigger-detail-7") },
+          { src: img("trigger-detail-8") },
+          { src: img("trigger-detail-9") },
+          { src: img("trigger-detail-10") },
+        ],
+      },
+      {
+        src: img("trigger-pump-3"),
         name: "پمپ تریگر قفل‌دار",
         text: "دارای قفل ایمنی برای جلوگیری از نشت و فشار ناخواسته",
         details: [
-          "قفل ایمنی برای حمل و نگهداری",
           "عملکرد روان و بادوام",
+          "قفل ایمنی برای حمل و نگهداری",
           "مناسب مصارف خانگی و صنعتی",
         ],
         subsets: [
-          { src: img("pump-trigger-2")},
-          { src: img("pump-trigger-2-detail")},
+          { src: img("trigger-detail-11") },
+          { src: img("trigger-detail-12") },
+          { src: img("trigger-detail-13") },
+          { src: img("trigger-detail-14") },
+          { src: img("trigger-detail-15") },
+        ],
+      },
+      {
+        src: img("trigger-pump-4"),
+        name: "پمپ تریگر دهانه 24/410 ",
+        text: "مجهز به سیستم مکش داخلی، نازل اسپری‌کننده و مکانیزم پاشش قابل‌کنترل برای توزیع یکنواخت مایعات",
+        details: [
+          "مجهز به فنر بازگشت اهرم",
+          "خروجی اسپری ریز و یکنواخت",
+          "اهرم با فرم کشیده و خوش‌دست",
+        ],
+        subsets: [
+          { src: img("trigger-detail-16") },
+          { src: img("trigger-detail-17") },
+          { src: img("trigger-detail-18") },
+          { src: img("trigger-detail-19") },
+          { src: img("trigger-detail-20") },
         ],
       },
     ],
@@ -191,8 +232,8 @@ export const categories: Category[] = [
           "مناسب بطری‌های کوچک و متوسط",
         ],
         subsets: [
-          { src: img("pump-spray-1")},
-          { src: img("pump-spray-1-detail")},
+          { src: img("pump-spray-1") },
+          { src: img("pump-spray-1-detail") },
         ],
       },
       {
@@ -205,8 +246,8 @@ export const categories: Category[] = [
           "خروجی دقیق در هر پاشش",
         ],
         subsets: [
-          { src: img("pump-spray-2")},
-          { src: img("pump-spray-2-detail")},
+          { src: img("pump-spray-2") },
+          { src: img("pump-spray-2-detail") },
         ],
       },
     ],
@@ -229,8 +270,8 @@ export const categories: Category[] = [
           "مناسب مایعات با غلظت کم",
         ],
         subsets: [
-          { src: img("pump-nozzle-1")},
-          { src: img("pump-nozzle-1-detail")},
+          { src: img("pump-nozzle-1") },
+          { src: img("pump-nozzle-1-detail") },
         ],
       },
       {
@@ -243,8 +284,8 @@ export const categories: Category[] = [
           "خروجی دقیق و بدون پاشیدگی",
         ],
         subsets: [
-          { src: img("pump-nozzle-2")},
-          { src: img("pump-nozzle-2-detail")},
+          { src: img("pump-nozzle-2") },
+          { src: img("pump-nozzle-2-detail") },
         ],
       },
     ],
@@ -267,8 +308,8 @@ export const categories: Category[] = [
           "کاهش مصرف محصول",
         ],
         subsets: [
-          { src: img("pump-foam-1")},
-          { src: img("pump-foam-1-detail")},
+          { src: img("pump-foam-1") },
+          { src: img("pump-foam-1-detail") },
         ],
       },
       {
@@ -281,8 +322,8 @@ export const categories: Category[] = [
           "عملکرد روان و بادوام",
         ],
         subsets: [
-          { src: img("pump-foam-2")},
-          { src: img("pump-foam-2-detail")},
+          { src: img("pump-foam-2") },
+          { src: img("pump-foam-2-detail") },
         ],
       },
     ],
@@ -305,8 +346,8 @@ export const categories: Category[] = [
           "مناسب بطری‌های کوچک",
         ],
         subsets: [
-          { src: img("pump-lidocaine-1")},
-          { src: img("pump-lidocaine-1-detail")},
+          { src: img("pump-lidocaine-1") },
+          { src: img("pump-lidocaine-1-detail") },
         ],
       },
       {
@@ -319,8 +360,8 @@ export const categories: Category[] = [
           "سازگار با گلوگاه‌های استاندارد",
         ],
         subsets: [
-          { src: img("pump-lidocaine-2")},
-          { src: img("pump-lidocaine-2-detail")},
+          { src: img("pump-lidocaine-2") },
+          { src: img("pump-lidocaine-2-detail") },
         ],
       },
     ],
@@ -343,8 +384,8 @@ export const categories: Category[] = [
           "بدنه مقاوم و بادوام",
         ],
         subsets: [
-          { src: img("pump-thick-1")},
-          { src: img("pump-thick-1-detail")},
+          { src: img("pump-thick-1") },
+          { src: img("pump-thick-1-detail") },
         ],
       },
       {
@@ -357,8 +398,8 @@ export const categories: Category[] = [
           "مناسب مصارف صنعتی و خانگی",
         ],
         subsets: [
-          { src: img("pump-thick-2")},
-          { src: img("pump-thick-2-detail")},
+          { src: img("pump-thick-2") },
+          { src: img("pump-thick-2-detail") },
         ],
       },
     ],
@@ -381,22 +422,18 @@ export const categories: Category[] = [
           "مناسب بطری‌های متنوع",
         ],
         subsets: [
-          { src: img("pump-vertical-1")},
-          { src: img("pump-vertical-1-detail")},
+          { src: img("pump-vertical-1") },
+          { src: img("pump-vertical-1-detail") },
         ],
       },
       {
         src: img("pump-vertical-2"),
         name: "پمپ عمودپاش با درپوش",
         text: "درپوش محافظ برای حفظ نازل و بهداشت بیشتر",
-        details: [
-          "درپوش محافظ نازل",
-          "خروجی کنترل‌شده",
-          "ظاهر مرتب و شیک",
-        ],
+        details: ["درپوش محافظ نازل", "خروجی کنترل‌شده", "ظاهر مرتب و شیک"],
         subsets: [
-          { src: img("pump-vertical-2")},
-          { src: img("pump-vertical-2-detail")},
+          { src: img("pump-vertical-2") },
+          { src: img("pump-vertical-2-detail") },
         ],
       },
     ],
@@ -418,8 +455,8 @@ export const categories: Category[] = [
           "مناسب بطری‌های کوچک",
         ],
         subsets: [
-          { src: img("pump-nasal-1")},
-          { src: img("pump-nasal-1-detail")},
+          { src: img("pump-nasal-1") },
+          { src: img("pump-nasal-1-detail") },
         ],
       },
       {
@@ -432,8 +469,8 @@ export const categories: Category[] = [
           "طراحی ایمن و بهداشتی",
         ],
         subsets: [
-          { src: img("pump-nasal-2")},
-          { src: img("pump-nasal-2-detail")},
+          { src: img("pump-nasal-2") },
+          { src: img("pump-nasal-2-detail") },
         ],
       },
     ],
@@ -450,28 +487,20 @@ export const categories: Category[] = [
         src: img("pump-pressure-1"),
         name: "پمپ اسپری تحت فشار استاندارد",
         text: "پاشش قوی و پیوسته برای مصارف متنوع",
-        details: [
-          "فشار پاشش بالا",
-          "خروجی پیوسته و یکنواخت",
-          "بدنه مقاوم",
-        ],
+        details: ["فشار پاشش بالا", "خروجی پیوسته و یکنواخت", "بدنه مقاوم"],
         subsets: [
-          { src: img("pump-pressure-1")},
-          { src: img("pump-pressure-1-detail")},
+          { src: img("pump-pressure-1") },
+          { src: img("pump-pressure-1-detail") },
         ],
       },
       {
         src: img("pump-pressure-2"),
         name: "پمپ اسپری تحت فشار قفل‌دار",
         text: "دارای قفل ایمنی برای حمل و نگهداری بدون نشت",
-        details: [
-          "قفل ایمنی",
-          "عملکرد روان",
-          "مناسب مصارف خانگی و صنعتی",
-        ],
+        details: ["قفل ایمنی", "عملکرد روان", "مناسب مصارف خانگی و صنعتی"],
         subsets: [
-          { src: img("pump-pressure-2")},
-          { src: img("pump-pressure-2-detail")},
+          { src: img("pump-pressure-2") },
+          { src: img("pump-pressure-2-detail") },
         ],
       },
     ],
@@ -496,8 +525,8 @@ export const categories: Category[] = [
           "مناسب سرم و روغن",
         ],
         subsets: [
-          { src: img("cap-dropper-1")},
-          { src: img("cap-dropper-1-detail")},
+          { src: img("cap-dropper-1") },
+          { src: img("cap-dropper-1-detail") },
         ],
       },
       {
@@ -510,8 +539,8 @@ export const categories: Category[] = [
           "سازگار با بطری‌های استاندارد",
         ],
         subsets: [
-          { src: img("cap-dropper-2")},
-          { src: img("cap-dropper-2-detail")},
+          { src: img("cap-dropper-2") },
+          { src: img("cap-dropper-2-detail") },
         ],
       },
     ],
@@ -534,8 +563,8 @@ export const categories: Category[] = [
           "سازگار با گلوگاه‌های استاندارد",
         ],
         subsets: [
-          { src: img("cap-plastic-1")},
-          { src: img("cap-plastic-1-detail")},
+          { src: img("cap-plastic-1") },
+          { src: img("cap-plastic-1-detail") },
         ],
       },
       {
@@ -548,8 +577,8 @@ export const categories: Category[] = [
           "مناسب شامپو و محصولات مایع",
         ],
         subsets: [
-          { src: img("cap-plastic-2")},
-          { src: img("cap-plastic-2-detail")},
+          { src: img("cap-plastic-2") },
+          { src: img("cap-plastic-2-detail") },
         ],
       },
     ],
@@ -572,8 +601,8 @@ export const categories: Category[] = [
           "مناسب بسته‌بندی‌های آرایشی",
         ],
         subsets: [
-          { src: img("cap-aluminum-1")},
-          { src: img("cap-aluminum-1-detail")},
+          { src: img("cap-aluminum-1") },
+          { src: img("cap-aluminum-1-detail") },
         ],
       },
       {
@@ -586,8 +615,8 @@ export const categories: Category[] = [
           "سازگار با بطری‌های استاندارد",
         ],
         subsets: [
-          { src: img("cap-aluminum-2")},
-          { src: img("cap-aluminum-2-detail")},
+          { src: img("cap-aluminum-2") },
+          { src: img("cap-aluminum-2-detail") },
         ],
       },
     ],
@@ -612,8 +641,8 @@ export const categories: Category[] = [
           "مناسب کرم و سرم",
         ],
         subsets: [
-          { src: img("bottle-airless-1")},
-          { src: img("bottle-airless-1-detail")},
+          { src: img("bottle-airless-1") },
+          { src: img("bottle-airless-1-detail") },
         ],
       },
       {
@@ -626,8 +655,8 @@ export const categories: Category[] = [
           "رنگ‌ها و حجم‌های متنوع",
         ],
         subsets: [
-          { src: img("bottle-airless-2")},
-          { src: img("bottle-airless-2-detail")},
+          { src: img("bottle-airless-2") },
+          { src: img("bottle-airless-2-detail") },
         ],
       },
     ],
@@ -650,8 +679,8 @@ export const categories: Category[] = [
           "سازگار با پمپ و درب‌های استاندارد",
         ],
         subsets: [
-          { src: img("bottle-polymer-1")},
-          { src: img("bottle-polymer-1-detail")},
+          { src: img("bottle-polymer-1") },
+          { src: img("bottle-polymer-1-detail") },
         ],
       },
       {
@@ -664,8 +693,8 @@ export const categories: Category[] = [
           "مناسب محصولات آرایشی و بهداشتی",
         ],
         subsets: [
-          { src: img("bottle-polymer-2")},
-          { src: img("bottle-polymer-2-detail")},
+          { src: img("bottle-polymer-2") },
+          { src: img("bottle-polymer-2-detail") },
         ],
       },
     ],
@@ -688,22 +717,18 @@ export const categories: Category[] = [
           "سازگار با پمپ و قطره‌چکان",
         ],
         subsets: [
-          { src: img("bottle-glass-1")},
-          { src: img("bottle-glass-1-detail")},
+          { src: img("bottle-glass-1") },
+          { src: img("bottle-glass-1-detail") },
         ],
       },
       {
         src: img("bottle-glass-2"),
         name: "بطری شیشه‌ای رنگی",
         text: "شیشه رنگی برای محافظت بیشتر محتویات در برابر نور",
-        details: [
-          "محافظت در برابر نور",
-          "رنگ‌های متنوع",
-          "مناسب عطر و روغن",
-        ],
+        details: ["محافظت در برابر نور", "رنگ‌های متنوع", "مناسب عطر و روغن"],
         subsets: [
-          { src: img("bottle-glass-2")},
-          { src: img("bottle-glass-2-detail")},
+          { src: img("bottle-glass-2") },
+          { src: img("bottle-glass-2-detail") },
         ],
       },
     ],
@@ -722,14 +747,10 @@ export const categories: Category[] = [
         src: img("mini-bag-cosmetic-1"),
         name: "مینی‌بگ آرایشی ساده",
         text: "کیف کوچک و منظم برای نگهداری لوازم آرایشی",
-        details: [
-          "جنس مقاوم و سبک",
-          "زیپ محکم",
-          "مناسب حمل روزمره",
-        ],
+        details: ["جنس مقاوم و سبک", "زیپ محکم", "مناسب حمل روزمره"],
         subsets: [
-          { src: img("mini-bag-cosmetic-1")},
-          { src: img("mini-bag-cosmetic-1-detail")},
+          { src: img("mini-bag-cosmetic-1") },
+          { src: img("mini-bag-cosmetic-1-detail") },
         ],
       },
       {
@@ -742,8 +763,8 @@ export const categories: Category[] = [
           "مناسب هدیه و تبلیغات",
         ],
         subsets: [
-          { src: img("mini-bag-cosmetic-2")},
-          { src: img("mini-bag-cosmetic-2-detail")},
+          { src: img("mini-bag-cosmetic-2") },
+          { src: img("mini-bag-cosmetic-2-detail") },
         ],
       },
     ],
@@ -759,14 +780,10 @@ export const categories: Category[] = [
         src: img("mini-bag-travel-1"),
         name: "مینی‌بگ مسافرتی ساده",
         text: "کیف جمع‌وجور برای حمل محصولات شخصی در سفر",
-        details: [
-          "جمع‌وجور و سبک",
-          "زیپ محکم و امن",
-          "مناسب سفر کوتاه و بلند",
-        ],
+        details: ["جمع‌وجور و سبک", "زیپ محکم و امن", "مناسب سفر کوتاه و بلند"],
         subsets: [
-          { src: img("mini-bag-travel-1")},
-          { src: img("mini-bag-travel-1-detail")},
+          { src: img("mini-bag-travel-1") },
+          { src: img("mini-bag-travel-1-detail") },
         ],
       },
       {
@@ -779,8 +796,8 @@ export const categories: Category[] = [
           "مناسب بطری‌های کوچک سفری",
         ],
         subsets: [
-          { src: img("mini-bag-travel-2")},
-          { src: img("mini-bag-travel-2-detail")},
+          { src: img("mini-bag-travel-2") },
+          { src: img("mini-bag-travel-2-detail") },
         ],
       },
     ],
